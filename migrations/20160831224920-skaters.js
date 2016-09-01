@@ -23,7 +23,7 @@ module.exports = {
         favPosition: Sequelize.STRING,
         photo: Sequelize.STRING,
         admin: Sequelize.BOOLEAN,
-        summary: Sequelize.TEXT,
+        summary: Sequelize.TEXT
       }
     )
   },
