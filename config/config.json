@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "peechiz",
+    "password": null,
+    "database": "anarchy",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "peechiz",
+    "password": null,
+    "database": "anarchy_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "peechiz",
+    "password": null,
+    "database": "anarchy_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
