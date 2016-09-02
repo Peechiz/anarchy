@@ -2,3 +2,6 @@ Landing: https://wireframe.cc/QftLvR
 Profile: https://wireframe.cc/AivDsg
 New Skater: https://wireframe.cc/25JGSX
 Admin Panel: https://wireframe.cc/Tlg4Qr
+Bout Recap(Blog): https://wireframe.cc/dcCWlW
+
+NOTE: Calendar not included, because it may end up being a stretch goal to pursue after the completion of the program.
