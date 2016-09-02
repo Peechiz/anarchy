@@ -10,11 +10,14 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "chai": "^3.5.0",
     "hapi": "^15.0.2",
     "locus": "^1.2.0",
     "method-override": "^2.3.6",
+    "mocha": "^3.0.2",
     "pg": "^6.1.0",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^3.24.1"
+    "sequelize": "^3.24.1",
+    "supertest": "^2.0.0"
   }
 }
