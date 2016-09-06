@@ -2,8 +2,8 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-    return queryInterface.createTable('skaters_gear',
-    {
+
+    return queryInterface.createTable('reviews', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -18,8 +18,8 @@ module.exports = {
       skater_id: {
         type: Sequelize.INTEGER,
         references: {
-            model: 'skaters',
-            key: 'id'
+          model: 'skaters',
+          key: 'id'
         },
         onDelete: 'cascade'
       },
@@ -28,13 +28,15 @@ module.exports = {
         references: {
           model: 'gear',
           key: 'id'
-        }
+        },
+        onDelete: 'cascade'
       },
-      is_current: Sequelize.BOOLEAN
+      text: Sequelize.STRING,
+      rating: Sequelize.INTEGER
     })
   },
 
   down: function (queryInterface, Sequelize) {
-    return queryInterface.dropTable('skaters_gear')
+    return queryInterface.dropTable('reviews');
   }
 };

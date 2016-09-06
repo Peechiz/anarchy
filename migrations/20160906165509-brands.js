@@ -2,7 +2,7 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-    return queryInterface.createTable('gear', {
+    return queryInterface.createTable('brands', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -11,13 +11,14 @@ module.exports = {
       createdAt: {
         type: Sequelize.DATE
       },
-      brand: Sequelize.STRING,
-      name: Sequelize.STRING,
-      type: Sequelize.STRING
-    })
+      updatedAt: {
+        type: Sequelize.DATE
+      },
+      name: Sequelize.STRING
+    });
   },
 
   down: function (queryInterface, Sequelize) {
-    return queryInterface.dropTable('gear');
+    return queryInterface.dropTable('brands');
   }
 };
