@@ -10,6 +10,7 @@
 
 $greyed: #4A4A4A;
 $blood: #BA141A;
+$blood_select: #BA5C60;
 
 body {
   background-color: black;
@@ -19,24 +20,63 @@ body {
     color: $blood;
     font-size: .8em;
     text-decoration: none;
+    &:hover {
+      color: $blood_select;
+    }
   }
   hr {
-    border: 1px solid #979797;
+    // border-bottom: 1px solid #979797;
+    border: none;
+    height: 1px;
+    background-color: $greyed;
+  }
+  ul {
+    padding-left: 0;
+    list-style-type: none;
   }
 }
 
 nav {
-  border-top: 1px solid $blood;
+  // border-top: 1px solid $blood;
   border-bottom: 1px solid $blood;
+  border-left: 1px solid $blood;
   a {
     font-size: 1em;
     text-transform: uppercase;
   }
   ul {
-    margin: 8px 0 8px 0;
-    list-style-type: none;
+    padding-left: 40px;
+    margin: 15px 0 1px 0;
     li {
       display: inline;
+      margin-right: 20px;
+      text-transform: uppercase;
+    }
+  }
+}
+
+header {
+  padding: 5px 10px;
+  .logo {
+    display: inline;
+    font-size: 2em;
+    > img {
+      height: 30px;
+      display: inline;
+    }
+    span>img{
+      position: relative;
+      margin-bottom: 5px;
+    }
+  }
+  ul {
+    float: right;
+    li {
+      display: inline;
+      a {
+        font-size: 1em;
+        color: white;
+      }
     }
   }
 }
@@ -48,12 +88,14 @@ main {
 
 .profile {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   img {
     border: 3px solid white;
   }
   section{
     max-width: 33%;
+    min-width: 260px;
   }
   h1 {
     span {
@@ -63,15 +105,14 @@ main {
   .info {
     ul {
       list-style-type: none;
-      padding-left: 0;
       span {
         font-family: 'rockSalt', helvetica, sans-serif;
+        margin-left: 5px;
       }
     }
   }
   .gear {
     ul {
-      list-style-type: none;
       li {
         clear: both;
         margin-bottom: 10px;
@@ -79,6 +120,13 @@ main {
           float: right;
         }
       }
+    }
+    .review > p > img {
+      float: left;
+      margin: 0 10px 0 0;
+      max-height: 70px;
+      border: 2px solid white;
+      padding: 2px;
     }
   }
   .window {

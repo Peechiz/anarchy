@@ -12,20 +12,48 @@ body {
     color: #BA141A;
     font-size: .8em;
     text-decoration: none; }
+    body a:hover {
+      color: #BA5C60; }
   body hr {
-    border: 1px solid #979797; }
+    border: none;
+    height: 1px;
+    background-color: #4A4A4A; }
+  body ul {
+    padding-left: 0;
+    list-style-type: none; }
 
 nav {
-  border-top: 1px solid #BA141A;
-  border-bottom: 1px solid #BA141A; }
+  border-bottom: 1px solid #BA141A;
+  border-left: 1px solid #BA141A; }
   nav a {
     font-size: 1em;
     text-transform: uppercase; }
   nav ul {
-    margin: 8px 0 8px 0;
-    list-style-type: none; }
+    padding-left: 40px;
+    margin: 15px 0 1px 0; }
     nav ul li {
+      display: inline;
+      margin-right: 20px;
+      text-transform: uppercase; }
+
+header {
+  padding: 5px 10px; }
+  header .logo {
+    display: inline;
+    font-size: 2em; }
+    header .logo > img {
+      height: 30px;
       display: inline; }
+    header .logo span > img {
+      position: relative;
+      margin-bottom: 5px; }
+  header ul {
+    float: right; }
+    header ul li {
+      display: inline; }
+      header ul li a {
+        font-size: 1em;
+        color: white; }
 
 main {
   background-color: #141414;
@@ -33,25 +61,31 @@ main {
 
 .profile {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around; }
   .profile img {
     border: 3px solid white; }
   .profile section {
-    max-width: 33%; }
+    max-width: 33%;
+    min-width: 260px; }
   .profile h1 span {
     color: #4A4A4A; }
   .profile .info ul {
-    list-style-type: none;
-    padding-left: 0; }
-    .profile .info ul span {
-      font-family: 'rockSalt', helvetica, sans-serif; }
-  .profile .gear ul {
     list-style-type: none; }
-    .profile .gear ul li {
-      clear: both;
-      margin-bottom: 10px; }
-      .profile .gear ul li .right {
-        float: right; }
+    .profile .info ul span {
+      font-family: 'rockSalt', helvetica, sans-serif;
+      margin-left: 5px; }
+  .profile .gear ul li {
+    clear: both;
+    margin-bottom: 10px; }
+    .profile .gear ul li .right {
+      float: right; }
+  .profile .gear .review > p > img {
+    float: left;
+    margin: 0 10px 0 0;
+    max-height: 70px;
+    border: 2px solid white;
+    padding: 2px; }
   .profile .window .box {
     padding: 10px;
     border: 3px solid white; }
