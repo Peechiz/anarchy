@@ -18,9 +18,20 @@ server.register(require('inert'), (err) => {
 
   const skaters = require('./api/skaters')
   const thing = require('./api/thing')
-  
+
   server.route(skaters);
   server.route(thing);
+
+  server.route({
+    method: 'GET',
+    path: '/{param*}',
+    handler: {
+        directory: {
+            path: 'public',
+            listing: false
+        }
+    }
+});
 
   server.start((err) => {
 
