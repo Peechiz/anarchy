@@ -1,36 +1,26 @@
-'use strict';
+'use strict'
 
-var fs        = require('fs');
-var path      = require('path');
-var Sequelize = require('sequelize');
-var basename  = path.basename(module.filename);
-var env       = process.env.NODE_ENV || 'development';
-var config    = require(__dirname + '/../config/config.json')[env];
-var db        = {};
+var db = require('../db/sequelize');
 
-if (config.use_env_variable) {
-  var sequelize = new Sequelize(process.env[config.use_env_variable]);
-} else {
-  var sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+// load all the sequelize models.
+var models =  {
+  Skaters: db.sequelize.import(__dirname + '/' + 'skater'),
+  SkatersGear: db.sequelize.import(__dirname + '/' + 'skaters_gear'),
+  Reviews: db.sequelize.import(__dirname + '/' + 'reviews'),
+  Gear: db.sequelize.import(__dirname + '/' + 'gear'),
 
-fs
-  .readdirSync(__dirname)
-  .filter(function(file) {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
-  })
-  .forEach(function(file) {
-    var model = sequelize['import'](path.join(__dirname, file));
-    db[model.name] = model;
-  });
+};
 
-Object.keys(db).forEach(function(modelName) {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
-});
+// create relationships between models.
+(function (m) {
+  m.Skaters.hasMany(m.SkatersGear);
+  m.SkatersGear.belongsTo(m.Skaters);
+  m.SkatersGear.hasOne(m.Gear);
+  m.Skaters.hasMany(m.Reviews);
+  m.Reviews.belongsTo(m.Skaters);
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
+})(models);
 
-module.exports = db;
+module.exports = models;
+module.exports.Sequelize = db.sequelize;
+module.exports.Sequelize = db.Sequelize;
