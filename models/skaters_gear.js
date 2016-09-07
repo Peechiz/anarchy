@@ -1,6 +1,6 @@
 'use strict';
     module.exports = function(sequelize, DataTypes) {
-      var SkaterGear = sequelize.define('SkaterGear', {
+      var SkaterGear = sequelize.define('skaters_gear', {
         skaterId: {
           type: DataTypes.INTEGER,
           references: {

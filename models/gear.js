@@ -1,6 +1,6 @@
 'use strict';
     module.exports = function(sequelize, DataTypes) {
-      var Gear = sequelize.define('Gear', {
+      var Gear = sequelize.define('gear', {
         brandId: {
           type: DataTypes.INTEGER,
           references: {
@@ -9,7 +9,7 @@
           }
         },
         name: DataTypes.STRING,
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       }, {
         timestamps: true,
         classMethods: {
