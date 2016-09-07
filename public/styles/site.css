@@ -1,0 +1,59 @@
+@font-face {
+  font-family: 'tanek';
+  src: url("../font/Tanek.otf"); }
+@font-face {
+  font-family: 'rockSalt';
+  src: url("../font/RockSalt.ttf"); }
+body {
+  background-color: black;
+  color: white;
+  font-family: 'tanek', helvetica, sans-serif; }
+  body a {
+    color: #BA141A;
+    font-size: .8em;
+    text-decoration: none; }
+  body hr {
+    border: 1px solid #979797; }
+
+nav {
+  border-top: 1px solid #BA141A;
+  border-bottom: 1px solid #BA141A; }
+  nav a {
+    font-size: 1em;
+    text-transform: uppercase; }
+  nav ul {
+    margin: 8px 0 8px 0;
+    list-style-type: none; }
+    nav ul li {
+      display: inline; }
+
+main {
+  background-color: #141414;
+  padding: 10px 30px; }
+
+.profile {
+  display: flex;
+  justify-content: space-around; }
+  .profile img {
+    border: 3px solid white; }
+  .profile section {
+    max-width: 33%; }
+  .profile h1 span {
+    color: #4A4A4A; }
+  .profile .info ul {
+    list-style-type: none;
+    padding-left: 0; }
+    .profile .info ul span {
+      font-family: 'rockSalt', helvetica, sans-serif; }
+  .profile .gear ul {
+    list-style-type: none; }
+    .profile .gear ul li {
+      clear: both;
+      margin-bottom: 10px; }
+      .profile .gear ul li .right {
+        float: right; }
+  .profile .window .box {
+    padding: 10px;
+    border: 3px solid white; }
+
+/*# sourceMappingURL=site.css.map */
