@@ -1,36 +1,36 @@
 'use strict';
 
 const Hapi = require('hapi');
+const Path = require('path');
+
+
 // const sequelize = require('db/sequelize');
 
 const server = new Hapi.Server();
 
 server.connection({ port: process.env.PORT || 3000 });
 
+server.register(require('inert'), (err) => {
 
+  if (err) {
+    throw err;
+  }
 
-server.route({
-    method: 'GET',
-    path: '/{name}',
-    handler: function (request, reply) {
-        reply('Hello, ' + encodeURIComponent(request.params.name) + '!');
-    }
-});
+  const skaters = require('./api/skaters')
+  const thing = require('./api/thing')
+  
+  server.route(skaters);
+  server.route(thing);
 
-server.route({
-    method: 'GET',
-    path: '/',
-    handler: function (req, res) {
-        res('Hello, world!');
-    }
-});
-
-server.start((err) => {
+  server.start((err) => {
 
     if (err) {
-        throw err;
+      throw err;
     }
     console.log(`Server running at: ${server.info.uri}`);
+  });
+
 });
+
 
 module.exports = server;
