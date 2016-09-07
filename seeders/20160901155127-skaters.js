@@ -92,43 +92,53 @@ module.exports = {
       return queryInterface.bulkInsert('skaters_gear', [{
         skater_id: 1,
         gear_id: 2,
-        is_current: true
+        is_current: true,
+        img: 'http://flattrackstats.com/sites/default/files/imagecache/profile/logos/AA-logo.png'
       }, {
         skater_id: 1,
         gear_id: 1,
-        is_current: true
+        is_current: true,
+        img: 'http://flattrackstats.com/sites/default/files/imagecache/profile/logos/AA-logo.png'
       }, {
         skater_id: 1,
         gear_id: 5,
-        is_current: true
+        is_current: true,
+        img: 'http://flattrackstats.com/sites/default/files/imagecache/profile/logos/AA-logo.png'
       }, {
         skater_id: 1,
         gear_id: 6,
-        is_current: true
+        is_current: true,
+        img: 'http://flattrackstats.com/sites/default/files/imagecache/profile/logos/AA-logo.png'
       }, {
         skater_id: 1,
         gear_id: 7,
-        is_current: true
+        is_current: true,
+        img: 'http://flattrackstats.com/sites/default/files/imagecache/profile/logos/AA-logo.png'
       }, {
         skater_id: 1,
         gear_id: 8,
-        is_current: true
+        is_current: true,
+        img: 'http://flattrackstats.com/sites/default/files/imagecache/profile/logos/AA-logo.png'
       }, {
         skater_id: 1,
         gear_id: 9,
-        is_current: true
+        is_current: true,
+        img: 'http://flattrackstats.com/sites/default/files/imagecache/profile/logos/AA-logo.png'
       }, { // END SKATER 1
         skater_id: 2,
         gear_id: 1,
-        is_current: true
+        is_current: true,
+        img: 'http://flattrackstats.com/sites/default/files/imagecache/profile/logos/AA-logo.png'
       }, {
         skater_id: 3,
         gear_id: 3,
-        is_current: true
+        is_current: true,
+        img: 'http://flattrackstats.com/sites/default/files/imagecache/profile/logos/AA-logo.png'
       }, {
         skater_id: 4,
         gear_id: 4,
-        is_current: true
+        is_current: true,
+        img: 'http://flattrackstats.com/sites/default/files/imagecache/profile/logos/AA-logo.png'
       }])
     }).then(() => {
       return queryInterface.bulkInsert('reviews', [{
