@@ -16,7 +16,7 @@
   "production": {
     "username": "cejjxpfdcxiaem",
     "password": "VvsK16XISWvjXu8Buq0bImhIBc",
-    "database": "anarchy",
+    "database": "d4pgbf752a71tr",
     "host": "ec2-54-243-202-174.compute-1.amazonaws.com",
     "dialect": "postgres"
   }
