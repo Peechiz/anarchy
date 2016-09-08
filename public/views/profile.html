@@ -39,8 +39,8 @@
       <h1>GEAR</h1>
         <ul>
           <li>
-            SKATES: Brand
-            <div class="review">
+            SKATES: Brand <a ng-click="rev=!rev" ng-hide="rev">review</a>
+            <div class="review" ng-init="rev=true" ng-show="rev">
 
               <hr>
               <p><img src="img/shoe.png" alt="">This is my second pair of skates, and they’re a lot more comfortable than my other pair.</p>
@@ -48,7 +48,7 @@
               <a href="#">edit</a>
               <hr>
 
-              <a href="#" class="right">hide review</a>
+              <a class="right" ng-click="rev = !rev">hide review</a>
             </div>
           </li>
           <li>WHEELS: Brand <a href="#">review</a></li>
