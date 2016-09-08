@@ -16,7 +16,7 @@
   "production": {
     "username": "peechiz",
     "password": null,
-    "database": "anarchy_production",
+    "database": "anarchy",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }
