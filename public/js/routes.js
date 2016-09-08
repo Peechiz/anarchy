@@ -8,8 +8,8 @@ angular.module('routes',['ngRoute'])
     controller: 'profileController',
     controllerAs: 'profile'
   })
-  // .when('/cart',{
-  //   templateUrl: 'views/cart.html',
-  //   controller: 'cartController'
-  // })
+  .when('/',{
+    templateUrl: 'views/landing.html',
+    // controller: 'landingController'
+  })
 });
