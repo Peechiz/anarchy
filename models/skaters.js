@@ -12,9 +12,18 @@
         summary: DataTypes.TEXT
       }, {
         timestamps: true,
-        classMethods: {
-          associate: function(models) {
-            // associations can be defined here
+        getterMethods: {
+          getSkater: function(){
+            return {
+              userName: this.userName,
+              derbyName: this.derbyName,
+              number: this.number,
+              team: this.team,
+              favPosition: this.favPosition,
+              photo: this.photo,
+              rank: this.rank,
+              summary: this.summary
+            }
           }
         }
       });
