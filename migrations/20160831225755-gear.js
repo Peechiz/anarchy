@@ -14,6 +14,9 @@ module.exports = {
       brand: Sequelize.STRING,
       name: Sequelize.STRING,
       type: Sequelize.STRING
+    },
+    {
+      freezeTableName: true
     })
   },
 
