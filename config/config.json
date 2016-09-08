@@ -14,10 +14,10 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "peechiz",
-    "password": null,
+    "username": "cejjxpfdcxiaem",
+    "password": "VvsK16XISWvjXu8Buq0bImhIBc",
     "database": "anarchy",
-    "host": "127.0.0.1",
+    "host": "ec2-54-243-202-174.compute-1.amazonaws.com",
     "dialect": "postgres"
   }
 }
