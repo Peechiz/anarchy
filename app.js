@@ -10,6 +10,8 @@ const server = new Hapi.Server();
 
 server.connection({ port: process.env.PORT || 3000 });
 
+server.app.models = require('./models/index')
+
 server.register(require('inert'), (err) => {
 
   if (err) {
