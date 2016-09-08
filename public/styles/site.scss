@@ -13,6 +13,7 @@ $blood: #BA141A;
 $blood_select: #BA5C60;
 
 body {
+  margin: 0;
   background-color: black;
   color: white;
   font-family: 'tanek', helvetica, sans-serif;
@@ -36,6 +37,35 @@ body {
   }
 }
 
+header {
+  padding: 5px 10px;
+  .logo {
+    display: inline;
+    font-size: 2em;
+    > img {
+      height: 30px;
+      display: inline;
+    }
+    span>img{
+      position: relative;
+      margin-bottom: 5px;
+    }
+  }
+  ul {
+    margin: 0;
+    float: right;
+    li {
+      margin-left: 20px;
+      display: inline;
+      a {
+        font-size: 1em;
+        color: white;
+        font-family: 'rockSalt', helvetica, sans-serif;
+      }
+    }
+  }
+}
+
 nav {
   // border-top: 1px solid $blood;
   border-bottom: 1px solid $blood;
@@ -55,36 +85,70 @@ nav {
   }
 }
 
-header {
-  padding: 5px 10px;
-  .logo {
-    display: inline;
-    font-size: 2em;
-    > img {
-      height: 30px;
-      display: inline;
-    }
-    span>img{
-      position: relative;
-      margin-bottom: 5px;
-    }
-  }
-  ul {
-    float: right;
-    li {
-      display: inline;
-      a {
-        font-size: 1em;
-        color: white;
-      }
-    }
-  }
-}
-
 main {
   background-color: rgb(20,20,20);
   padding: 10px 30px;
 }
+
+.splash{
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 400px;
+
+  h1 {
+    z-index: 2;
+    color: white;
+    font-size: 3em;
+    font-weight: normal;
+  }
+  div {
+    position: absolute;
+    margin-left: 40px;
+    max-width: 30%;
+    p {
+      font-size: 1.5em;
+      margin-bottom: 7px;
+    }
+    a {
+      font-size: 1em;
+    }
+  }
+
+  &:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-image: url('http://fillmurray.com/900/600');
+    background-size: cover;
+    // background-position-y: -50px;
+    background-repeat: no-repeat;
+    z-index: -2;
+  }
+  &:after {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: -webkit-linear-gradient(left, rgba(0,0,0,1), rgba(0,0,0,0));
+    content: '';
+    width: 50%;
+    height: 100%;
+  }
+}
+
+// .test {
+//   width: 90px;
+//   height: 60px;
+//   background-image: url('http://fillmurray.com/g/900/600');
+//   background-size: contain;
+// }
 
 .profile {
   display: flex;
