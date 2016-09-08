@@ -16,7 +16,10 @@ module.exports = {
         updatedAt: {
           type: Sequelize.DATE
         },
-        userName: Sequelize.STRING,
+        userName: {
+          type: Sequelize.STRING,
+          unique: true
+        },
         derbyName: Sequelize.STRING,
         number: Sequelize.STRING,
         team: Sequelize.STRING,
