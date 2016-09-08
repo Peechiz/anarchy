@@ -17,10 +17,10 @@ server.register(require('inert'), (err) => {
   }
 
   const skaters = require('./api/skaters')
-  const thing = require('./api/thing')
+  // const thing = require('./api/thing')
 
   server.route(skaters);
-  server.route(thing);
+  // server.route(thing);
 
   server.route({
     method: 'GET',
