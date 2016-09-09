@@ -1,8 +1,8 @@
 'use strict'
 
-app.controller('navController', navController)
+app.controller('navController', ['$scope','$location' ,navController])
 
-function navController(){
+function navController($scope, $location){
   const n = this;
 
   n.nav = {
@@ -15,9 +15,20 @@ function navController(){
 
   // sets the currently clicked link's color to white
   n.setClicked = function(key){
+    n.clear();
+    n.nav[key] = true;
+  }
+
+  n.clear = ()=>{
     for (var prop in n.nav){
       n.nav[prop] = false;
     }
-    n.nav[key] = true;
+  }
+
+  n.redirect = function(){
+    if ($location.path() !== '/'){
+      n.clear();
+      $location.path('/')
+    }
   }
 }
