@@ -19,9 +19,13 @@ server.register(require('inert'), (err) => {
   }
 
   const skaters = require('./api/skaters')
+  const auth = require('./api/auth')
+  const teams = require('./api/teams')
   // const thing = require('./api/thing')
 
   server.route(skaters);
+  server.route(teams);
+  server.route(auth);
   // server.route(thing);
 
   server.route({
