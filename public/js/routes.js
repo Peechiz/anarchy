@@ -24,4 +24,8 @@ angular.module('routes',['ngRoute'])
     templateUrl: 'views/admin.html',
     controller: 'adminController as a'
   })
+  .when('/teams', {
+    templateUrl: 'views/teams.html',
+    controller: 'teamsController as t'
+  })
 });
