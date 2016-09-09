@@ -21,7 +21,7 @@ angular.module('routes',['ngRoute'])
     // controller: 'joinController as j'
   })
   .when('/admin', {
-    templateUrl: 'views/admin.html'
+    templateUrl: 'views/admin.html',
     controller: 'adminController as a'
   })
 });
