@@ -1,0 +1,20 @@
+<div class="path">
+  <h3><a ng-click="t.selected=null">Teams</a> > {{t.selected}}</h3>
+</div>
+
+<div ng-repeat="team in t.teams" class="teams">
+  <div ng-hide="t.selected">
+    <h1>{{team.teamName}}</h1>
+    <button ng-click="t.selected = team.teamName">skaters</button>
+  </div>
+
+  <div ng-show="t.selected === team.teamName">
+    <h1>{{team.teamName}}</h1>
+    <hr>
+    <div class="skaters" ng-repeat="skater in team.skaters">
+      <img ng-src={{skater.photo}} alt="">
+      <p>{{skater.derbyName}}: #{{skater.number}}</p>
+    </div>
+  </div>
+
+</div>
