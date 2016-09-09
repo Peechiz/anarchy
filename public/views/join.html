@@ -1,0 +1,56 @@
+<main>
+  <div class="join">
+
+    <div class="info" ng-init="questions=false" ng-show="!questions">
+      <h1>SKATE OR DIE</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <input type="button" ng-click="questions=!questions" value="SKATE!" >
+    </div>
+
+    <form ng-submit="j.submit()" ng-show="questions">
+      <label for="">Briefly describe your derby/skating experience ( none is ok! )</label>
+      <textarea name="xp" rows="8" cols="80"></textarea>
+
+      <div class="fields">
+        <fieldset>
+          <label for="">User Name: </label>
+          <input type="text" name="name" value="">
+        </fieldset>
+        <fieldset>
+          <label for="">Password: </label>
+          <input type="password">
+        </fieldset>
+        <fieldset>
+          <label for="">Confirm Password: </label>
+          <input type="password">
+        </fieldset>
+        <fieldset>
+          <label for="">Phone Number: </label>
+          <input type="tel" name="name" value="">
+        </fieldset>
+        <fieldset>
+          <label for="">Email: </label>
+          <input type="email" name="name" value="">
+        </fieldset>
+      </div>
+
+      <p>Do you own a pair of quad rollerskates?</p>
+      <div class="radio">
+        <label for="">Yes</label>
+        <input type="radio" name="hasSkates" value="true">
+        <label for="">No</label>
+        <input type="radio" name="hasSkates" value="false">
+      </div>
+
+      <p>Do you have pads (elbow, knee, wrist, helmet, mouthgaurd)?</p>
+      <div class="radio">
+        <label for="">Yes</label>
+        <input type="radio" name="hasPads" value="true">
+        <label for="">No</label>
+        <input type="radio" name="hasPads" value="false">
+      </div>
+      <input type="submit">
+    </form>
+
+  </div>
+</main>
