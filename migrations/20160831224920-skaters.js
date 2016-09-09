@@ -20,6 +20,7 @@ module.exports = {
           type: Sequelize.STRING,
           unique: true
         },
+        password: Sequelize.STRING,
         derbyName: Sequelize.STRING,
         number: Sequelize.STRING,
         team: Sequelize.STRING,

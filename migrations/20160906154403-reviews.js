@@ -15,7 +15,7 @@ module.exports = {
       updatedAt: {
         type: Sequelize.DATE
       },
-      skater_id: {
+      skaterId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'skaters',
@@ -23,10 +23,10 @@ module.exports = {
         },
         onDelete: 'cascade'
       },
-      gear_id: {
+      gearId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'gear',
+          model: 'gears',
           key: 'id'
         },
         onDelete: 'cascade'
