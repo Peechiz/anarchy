@@ -54,7 +54,7 @@ header {
   .logo {
     display: inline;
     font-size: 2em;
-    > a img {
+    > img {
       height: 30px;
       display: inline;
     }
@@ -100,6 +100,20 @@ nav {
 main {
   background-color: rgb(20,20,20);
   padding: 10px 30px;
+}
+
+.teams {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h1, h3 {
+    text-transform: uppercase;
+  }
+  .skaters {
+    img {
+      height: 75px;
+    }
+  }
 }
 
 .join {

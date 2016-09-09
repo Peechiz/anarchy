@@ -36,7 +36,7 @@ header {
   header .logo {
     display: inline;
     font-size: 2em; }
-    header .logo > a img {
+    header .logo > img {
       height: 30px;
       display: inline; }
     header .logo span > img {
@@ -70,6 +70,15 @@ nav {
 main {
   background-color: #141414;
   padding: 10px 30px; }
+
+.teams {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .teams h1, .teams h3 {
+    text-transform: uppercase; }
+  .teams .skaters img {
+    height: 75px; }
 
 .join p {
   font-size: 1.3em;
