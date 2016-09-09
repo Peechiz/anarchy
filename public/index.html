@@ -13,18 +13,17 @@
   <script type="text/javascript" src="js/controllers/landingController.js"></script>
   <script type="text/javascript" src="js/controllers/joinController.js"></script>
   <script type="text/javascript" src="js/controllers/navController.js"></script>
-  <!-- <script type="text/javascript" src="js/controllers/teasController.js"></script>
-  <script type="text/javascript" src="js/controllers/cartController.js"></script>
-  <script type="text/javascript" src="js/directives/caffeine.js"></script> -->
+  <script type="text/javascript" src="js/controllers/adminController.js"></script>
+  <script type="text/javascript" src="js/controllers/teamsController.js"></script>
 
   <link rel="stylesheet" href="/styles/site.css">
   <link rel="icon" href="/img/star_icon.png">
 </head>
 <body ng-app="anarchy">
 
-  <header>
+  <header ng-controller="navController as n">
     <div class="logo">
-      <a href="/#/"><img src="img/logo.png"></a>
+      <img ng-click="n.redirect()" src="img/logo.png">
       <span>
         AUSTIN ANARCHY
         <img src="img/star_icon.png">
@@ -40,11 +39,41 @@
   <nav ng-controller="navController as n">
     <ul>
       <!-- <li><a href="">Calendar</a></li> -->
-      <li><a ng-click="n.setClicked('profile')" ng-class="{'noClick': n.nav.profile}" id="profile" href="">Profile</a></li>
-      <li><a ng-click="n.setClicked('teams')" ng-class="{'noClick': n.nav.teams}" id="teams" href="">Teams</a></li>
-      <li><a ng-click="n.setClicked('join')" ng-class="{'noClick': n.nav.join}" id="join" href="/#/join">Join Anarchy</a></li>
-      <li><a ng-click="n.setClicked('who')" ng-class="{'noClick': n.nav.who}" id="who" href="/#/whoarewe">Who Are We?</a></li>
-      <li><a ng-click="n.setClicked('admin')" ng-class="{'noClick': n.nav.admin}" id="admin" href="">Admin</a></li>
+      <li>
+        <a id="profile" href="/#/profile"
+        ng-click="n.setClicked('profile')"
+        ng-class="{'noClick': n.nav.profile}">
+          Profile
+        </a>
+      </li>
+      <li>
+        <a id="teams" href="/#/teams"
+        ng-click="n.setClicked('teams')"
+        ng-class="{'noClick': n.nav.teams}">
+          Teams
+        </a>
+      </li>
+      <li>
+        <a id="join" href="/#/join"
+        ng-click="n.setClicked('join')"
+        ng-class="{'noClick': n.nav.join}">
+          Join Anarchy
+        </a>
+      </li>
+      <li>
+        <a id="who" href="/#/whoarewe"
+        ng-click="n.setClicked('who')"
+        ng-class="{'noClick': n.nav.who}">
+          Who Are We?
+        </a>
+      </li>
+      <li>
+        <a id="admin" href="/#/admin"
+        ng-click="n.setClicked('admin')"
+        ng-class="{'noClick': n.nav.admin}">
+          Admin
+        </a>
+      </li>
     </ul>
   </nav>
 
