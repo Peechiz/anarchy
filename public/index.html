@@ -46,7 +46,7 @@
           <input type="submit">
         </form>
       </li>
-      <li ng-show="n.user"><a href="#">Log Out</a></li>
+      <li ng-show="n.hasLogin"><a href="" ng-click="n.logout()">Log Out</a></li>
     </ul>
   </header>
 
@@ -81,7 +81,7 @@
           Who Are We?
         </a>
       </li>
-      <li>
+      <li ng-if="n.isAdmin">
         <a id="admin" href="/#/admin"
         ng-click="n.setClicked('admin')"
         ng-class="{'noClick': n.nav.admin}">

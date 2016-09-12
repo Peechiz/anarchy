@@ -50,7 +50,7 @@ server.register(require('hapi-auth-jwt2'), err => {
     server.route(skaters);
     server.route(teams);
     server.route(auth);
-    
+
   // server.auth.default('jwt');
 })
 
