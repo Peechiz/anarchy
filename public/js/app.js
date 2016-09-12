@@ -27,7 +27,7 @@ app.factory('auth', ['$http', '$localStorage', ($http, $localStorage) => {
         // login successful if there's a token in the response
        if (response.token) {
            // store username and token in local storage to keep user logged in between page refreshes
-           $localStorage.currentUser = { userName: userName, token: response.token };
+           $localStorage.currentUser = { userName: userName, admin: response.admin, token: response.token };
 
            // add jwt token to auth header for all requests made by the $http service
            $http.defaults.headers.common.Authorization = 'Bearer ' + response.token;
@@ -44,5 +44,6 @@ app.factory('auth', ['$http', '$localStorage', ($http, $localStorage) => {
   function logout(){
     delete $localStorage.currentUser;
     $http.defaults.headers.common.Authorization = '';
+    // post to api/logout, remove admin thing marker
   }
 }])
