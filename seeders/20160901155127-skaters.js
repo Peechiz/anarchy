@@ -15,7 +15,8 @@ module.exports = {
         photo: 'http://www.fillmurray.com/300/300',
         admin: false,
         rank: 'member',
-        summary: 'I do it for the dank memes'
+        summary: 'I do it for the dank memes',
+        password: '$2a$08$hf6MYh81bz9qoIOONHTkWu9308Lup.O..HXejK2Z9hFaEKJ0G0f0q'
       }, {
         userName: 'todd',
         derbyName: '_todd_',
@@ -25,7 +26,8 @@ module.exports = {
         photo: 'http://www.fillmurray.com/300/300',
         admin: false,
         rank: 'member',
-        summary: 'this is my summary'
+        summary: 'this is my summary',
+        password: '$2a$08$hf6MYh81bz9qoIOONHTkWu9308Lup.O..HXejK2Z9hFaEKJ0G0f0q'
       }, {
         userName: 'bruc3',
         derbyName: 'Bruce Payne',
@@ -35,7 +37,8 @@ module.exports = {
         photo: 'http://www.fillmurray.com/300/300',
         admin: true,
         rank: 'captain',
-        summary: 'this is sparta'
+        summary: 'this is sparta',
+        password: '$2a$08$hf6MYh81bz9qoIOONHTkWu9308Lup.O..HXejK2Z9hFaEKJ0G0f0q'
       }, {
         userName: 'sharkn4do',
         derbyName: 'Sharknado',
@@ -45,7 +48,8 @@ module.exports = {
         photo: 'http://www.fillmurray.com/300/300',
         admin: false,
         rank: 'fresh meat',
-        summary: 'a tornado full of sharks'
+        summary: 'a tornado full of sharks',
+        password: '$2a$08$hf6MYh81bz9qoIOONHTkWu9308Lup.O..HXejK2Z9hFaEKJ0G0f0q'
       }])
     }).then(() => {
       return queryInterface.bulkInsert('brands', [{
