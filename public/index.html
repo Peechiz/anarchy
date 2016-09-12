@@ -7,6 +7,7 @@
   <!-- ANGULAR -->
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
   <script src="https://code.angularjs.org/1.4.4/angular-route.min.js" charset="utf-8"></script>
+  <script src="https://rawgithub.com/gsklee/ngStorage/master/ngStorage.js"></script>
   <script type="text/javascript" src="js/app.js"></script>
   <script type="text/javascript" src="js/routes.js"></script>
   <script type="text/javascript" src="js/controllers/profileController.js"></script>
@@ -31,8 +32,21 @@
       </span>
     </div>
     <ul>
-      <li><a href="#">Log In</a></li>
-      <li><a href="#">Log Out</a></li>
+      <li ng-hide="n.hasLogin || n.form"><a href="" ng-click="n.form = true">Log In</a></li>
+      <li ng-show="n.form">
+        <form ng-submit="n.auth.Login(n.user,n.pass,n.cb)">
+          <label for="">User Name: </label>
+          <input type="text" name="userName"
+          ng-model="n.user">
+
+          <label for="">Password: </label>
+          <input type="password" name="password"
+          ng-model="n.pass">
+
+          <input type="submit">
+        </form>
+      </li>
+      <li ng-show="n.user"><a href="#">Log Out</a></li>
     </ul>
   </header>
 
