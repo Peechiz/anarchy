@@ -1,9 +1,12 @@
 'use strict'
 
-app.controller('navController', ['$scope','$location' ,navController])
+app.controller('navController', ['$scope','$location', 'auth', navController])
 
-function navController($scope, $location){
+function navController($scope, $location, auth){
   const n = this;
+
+  n.hasLogin = false;
+  n.form = false;
 
   n.nav = {
     profile: false,
@@ -29,6 +32,17 @@ function navController($scope, $location){
     if ($location.path() !== '/'){
       n.clear();
       $location.path('/')
+    }
+  }
+
+  n.auth = auth;
+
+  n.cb = function(result){
+    if (result){
+      console.log('logged in');
+    }
+    else {
+      console.log('there was a problem logging in.');
     }
   }
 }
