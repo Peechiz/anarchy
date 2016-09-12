@@ -7,12 +7,13 @@ module.exports = [
     method: 'POST',
     path: '/api/auth',
     config: {
+      auth: false,
       handler: function(req,res){
         const Skaters = req.server.app.models.Skaters;
-
         Skaters.findAll({
           where: {userName: req.payload.userName}
         }).then(data => {
+          console.log('DATA:',data);
           if (data.length){
             // found the skater
             var skater = data[0].toJSON();
@@ -24,8 +25,9 @@ module.exports = [
                 userName: skater.userName,
                 admin: skater.admin
               }
+
               var token = JWT.sign(obj, process.env.JWTKEY);
-              res({token: token})
+              res({token: token, admin: skater.admin})
             }
             else {
               res(Boom.badRequest('invalid password'))
@@ -34,7 +36,7 @@ module.exports = [
           }
           else {
             // couldn't find the skater
-            res(Boom.badRequest('skater not found'))
+            res(Boom.notFound('skater not found'))
           }
         })
       }
