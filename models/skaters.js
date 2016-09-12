@@ -15,7 +15,8 @@
         photo: DataTypes.STRING,
         admin: DataTypes.BOOLEAN,
         rank: DataTypes.STRING,
-        summary: DataTypes.TEXT
+        summary: DataTypes.TEXT,
+        password: DataTypes.STRING
       }, {
         timestamps: true,
         // getterMethods: {
