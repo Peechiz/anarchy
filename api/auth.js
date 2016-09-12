@@ -1,4 +1,6 @@
 const Boom = require('boom');
+const bcrypt = require('bcrypt');
+const JWT = require('jsonwebtoken');
 
 module.exports = [
   {
@@ -6,8 +8,35 @@ module.exports = [
     path: '/api/auth',
     config: {
       handler: function(req,res){
-        console.log(req.payload);
-        res(req.payload)
+        const Skaters = req.server.app.models.Skaters;
+
+        Skaters.findAll({
+          where: {userName: req.payload.userName}
+        }).then(data => {
+          if (data.length){
+            // found the skater
+            var skater = data[0].toJSON();
+            var validPass = bcrypt.compareSync(req.payload.password, skater.password)
+            if (validPass){
+              // return JWT
+              var obj = {
+                id: skater.id,
+                userName: skater.userName,
+                admin: skater.admin
+              }
+              var token = JWT.sign(obj, process.env.JWTKEY);
+              res({token: token})
+            }
+            else {
+              res(Boom.badRequest('invalid password'))
+            }
+
+          }
+          else {
+            // couldn't find the skater
+            res(Boom.badRequest('skater not found'))
+          }
+        })
       }
     }
   },
@@ -16,7 +45,7 @@ module.exports = [
     path: '/api/auth/new',
     config: {
       handler: function(req,res){
-        res('profile created')
+        res('thanks for signing up!')
       }
     }
   }
