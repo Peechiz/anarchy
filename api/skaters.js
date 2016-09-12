@@ -4,9 +4,12 @@ module.exports = [{
   method: 'GET',
   path: '/api/skaters',
   config: {
+    // auth: 'jwt',
     handler: function(req, res) {
       const Skaters = req.server.app.models.Skaters;
-      Skaters.findAll().then((records) => {
+      Skaters.findAll({
+        attributes: { exclude: ['password'] }
+      }).then((records) => {
         // console.log(records.toJSON());
         const data = records.map(record => {
           return record.dataValues
@@ -34,16 +37,6 @@ module.exports = [{
     SkatersGears.findAll({
       where: {skaterId: req.params.id}
     }).then(data=>{
-      res(data)
-    })
-  }
-},{
-  method: 'GET',
-  path: '/api/skater/{id}/gears/',
-  handler: function(req,res){
-    const Gears = req.server.app.models.Gears
-    const SkatersGears = req.server.app.models.SkatersGears
-    Gears.findeAll({ includes: {}}).then(data=>{
       res(data)
     })
   }
