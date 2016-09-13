@@ -24,7 +24,7 @@
 
   <header ng-controller="navController as n">
     <div class="logo">
-      <img ng-click="n.redirect()" src="img/logo.png">
+      <img ng-click="n.reload()" src="img/logo.png">
       <span>
         AUSTIN ANARCHY
         <img src="img/star_icon.png">
@@ -34,7 +34,7 @@
     <ul>
       <li ng-hide="n.hasLogin || n.form"><a href="" ng-click="n.form = true">Log In</a></li>
       <li ng-show="n.form">
-        <form ng-submit="n.auth.Login(n.user,n.pass,n.cb)">
+        <form ng-submit="n.login(n.user,n.pass,n.cb)">
           <label for="">User Name: </label>
           <input type="text" name="userName"
           ng-model="n.user">
@@ -53,7 +53,7 @@
   <nav ng-controller="navController as n">
     <ul>
       <!-- <li><a href="">Calendar</a></li> -->
-      <li>
+      <li ng-if="n.hasLogin">
         <a id="profile" href="/#/profile"
         ng-click="n.setClicked('profile')"
         ng-class="{'noClick': n.nav.profile}">
