@@ -9,6 +9,10 @@ angular.module('routes',['ngRoute'])
     resolve: {
       profile: (profile) => {
         return profile.getProfile()
+      },
+      gear: (profile) => {
+        console.log('getting gear');
+        return profile.getGear()
       }
     }
   })
