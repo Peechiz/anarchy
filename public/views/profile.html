@@ -4,11 +4,11 @@
   <div class="profile">
     <section class="info">
       <h1>PROFILE</h1>
-      <img src="http://fillmurray.com/200/200">
+      <img class="userimg" ng-src={{p.profile.photo}}>
       <ul>
-        <li>NAME: <span>Wombo Combo #7</span></li>
-        <li>TEAM: <span>Legion</span></li>
-        <li>FAV POSITION: <span>Jammer</span></li>
+        <li>NAME: <span>{{p.profile.derbyName}} #{{p.profile.number}}</span></li>
+        <li>TEAM: <span>{{p.profile.team.teamName}}</span></li>
+        <li>FAV POSITION: <span>{{p.profile.favPosition}}</span></li>
       </ul>
       <a href="#">edit</a>
     </section>
@@ -18,7 +18,7 @@
         <ul>
           <li>
             SKATES: Brand <a ng-click="rev=!rev" ng-hide="rev">review</a>
-            <div class="review" ng-init="rev=true" ng-show="rev">
+            <div class="review" ng-init="rev=false" ng-show="rev">
 
               <hr>
               <p><img src="img/shoe.png" alt="">This is my second pair of skates, and they’re a lot more comfortable than my other pair.</p>
@@ -38,8 +38,7 @@
       <!-- <h1>BIO <span>GALLERY</span></h1> -->
       <h1>BIO</h1>
       <div class="box">
-        <p>Lorem Khaled Ipsum is a major key to success. Hammock talk come soon. Special cloth alert. Surround yourself with angels. The ladies always say Khaled you smell good, I use no cologne. Cocoa butter is the key. Look at the sunset, life is amazing, life is beautiful, life is what you make it.</p>
-        <p>The key to more success is to have a lot of pillows. The key to more success is to have a lot of pillows. They never said winning was easy. Some people can’t handle success, I can. It’s important to use cocoa butter. It’s the key to more success, why not live smooth? Why live rough? The key is to drink coconut, fresh coconut, trust me.</p>
+        <p>{{p.profile.summary}}</p>
         <a href="#">edit</a>
       </div>
     </section>
