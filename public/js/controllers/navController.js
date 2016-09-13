@@ -1,8 +1,8 @@
 'use strict'
 
-app.controller('navController', ['$scope','$location', 'auth', '$localStorage', navController])
+app.controller('navController', ['$scope','$location', '$window', 'auth', '$localStorage', navController])
 
-function navController($scope, $location, auth, $localStorage){
+function navController($scope, $location, $window, auth, $localStorage){
   const n = this;
 
   n.hasLogin = $localStorage.currentUser ? true : false;
@@ -16,12 +16,12 @@ function navController($scope, $location, auth, $localStorage){
     admin: false,
   }
 
-  // n.isAdmin = (function(){
-  //   if (n.hasLogin){
-  //     return $localStorage.currentUser.admin
-  //   }
-  //   return false
-  // })()
+  n.isAdmin = (function(){
+    if (n.hasLogin){
+      return $localStorage.currentUser.admin
+    }
+    return false
+  })()
 
   // sets the currently clicked link's color to white
   n.setClicked = function(key){
@@ -35,11 +35,10 @@ function navController($scope, $location, auth, $localStorage){
     }
   }
 
-  n.redirect = function(){
-    if ($location.path() !== '/'){
-      n.clear();
-      $location.path('/')
-    }
+  n.reload = ()=> {
+    n.clear();
+    $window.location.href = '/#/'
+    $window.location.reload();
   }
 
   n.auth = auth;
@@ -49,17 +48,29 @@ function navController($scope, $location, auth, $localStorage){
       console.log('logged in');
       n.form = false;
       n.hasLogin = true;
+      $window.location.href = $location.path;
+      $window.location.reload();
+
     }
     else {
       console.log('there was a problem logging in.');
     }
   }
 
+  n.login = (user,pass,cb) => {
+    n.auth.Login(user,pass,n.cb)
+  }
+
   n.logout = function(){
     console.log('logging out');
     n.auth.Logout()
     n.hasLogin = false;
-    n.user = ''
-    n.pass = ''
+    n.isAdmin = false;
+    n.user = '';
+    n.pass = '';
+    $window.location.href = '/#/'
+    $window.location.reload();
   }
+
+
 }
