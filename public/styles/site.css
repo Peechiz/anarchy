@@ -71,6 +71,18 @@ main {
   background-color: #141414;
   padding: 10px 30px; }
 
+.admin {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .admin table {
+    width: 80%; }
+    .admin table img {
+      height: 75px; }
+    .admin table th {
+      text-align: left;
+      font-size: 1.3em; }
+
 .teams {
   display: flex;
   flex-direction: column;
@@ -152,6 +164,8 @@ main {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around; }
+  .profile .userimg {
+    height: 200px; }
   .profile img {
     border: 3px solid white; }
   .profile section {
