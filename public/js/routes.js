@@ -5,8 +5,12 @@ angular.module('routes',['ngRoute'])
   $routeProvider
   .when('/profile', {
     templateUrl: 'views/profile.html',
-    controller: 'profileController',
-    controllerAs: 'profile'
+    controller: 'profileController as p',
+    resolve: {
+      profile: (profile) => {
+        return profile.getProfile()
+      }
+    }
   })
   .when('/',{
     templateUrl: 'views/landing.html',
@@ -22,7 +26,12 @@ angular.module('routes',['ngRoute'])
   })
   .when('/admin', {
     templateUrl: 'views/admin.html',
-    controller: 'adminController as a'
+    controller: 'adminController as a',
+    // resolve: {
+    //   admin: (admin)=>{
+    //     return admin.isAdmin();
+    //   }
+    // }
   })
   .when('/teams', {
     templateUrl: 'views/teams.html',
