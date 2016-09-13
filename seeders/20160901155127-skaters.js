@@ -6,6 +6,13 @@ module.exports = {
       {teamName: 'Legion'},
       {teamName: 'Owls'}
     ]).then(()=>{
+      return queryInterface.bulkInsert('ranks', [
+        {name: 'Pending'},
+        {name: 'Fresh Meat'},
+        {name: 'Anarchist'},
+        {name: 'Captain'}
+      ])
+    }).then(()=>{
       return queryInterface.bulkInsert('skaters', [{
         userName: 'w0mbo',
         derbyName: 'Wombo Combo',
@@ -14,7 +21,7 @@ module.exports = {
         favPosition: 'Jammer',
         photo: 'http://www.fillmurray.com/300/300',
         admin: false,
-        rank: 'member',
+        rankId: 3,
         summary: 'I do it for the dank memes',
         password: '$2a$08$hf6MYh81bz9qoIOONHTkWu9308Lup.O..HXejK2Z9hFaEKJ0G0f0q'
       }, {
@@ -25,7 +32,7 @@ module.exports = {
         favPosition: 'Pivot',
         photo: 'http://www.fillmurray.com/300/300',
         admin: false,
-        rank: 'member',
+        rankId: 3,
         summary: 'this is my summary',
         password: '$2a$08$hf6MYh81bz9qoIOONHTkWu9308Lup.O..HXejK2Z9hFaEKJ0G0f0q'
       }, {
@@ -36,7 +43,7 @@ module.exports = {
         favPosition: 'Blocker',
         photo: 'http://www.fillmurray.com/300/300',
         admin: true,
-        rank: 'captain',
+        rankId: 4,
         summary: 'this is sparta',
         password: '$2a$08$hf6MYh81bz9qoIOONHTkWu9308Lup.O..HXejK2Z9hFaEKJ0G0f0q'
       }, {
@@ -47,7 +54,7 @@ module.exports = {
         favPosition: 'Pivot',
         photo: 'http://www.fillmurray.com/300/300',
         admin: false,
-        rank: 'fresh meat',
+        rankId: 2,
         summary: 'a tornado full of sharks',
         password: '$2a$08$hf6MYh81bz9qoIOONHTkWu9308Lup.O..HXejK2Z9hFaEKJ0G0f0q'
       }])
