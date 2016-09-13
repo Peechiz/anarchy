@@ -4,33 +4,92 @@
   <div class="profile">
     <section class="info">
       <h1>PROFILE</h1>
-      <img class="userimg" ng-src={{p.profile.photo}}>
-      <ul>
-        <li>NAME: <span>{{p.profile.derbyName}} #{{p.profile.number}}</span></li>
-        <li>TEAM: <span>{{p.profile.team.teamName}}</span></li>
-        <li>FAV POSITION: <span>{{p.profile.favPosition}}</span></li>
-      </ul>
-      <a href="#">edit</a>
+      <div ng-hide="p.showEditInfo">
+        <img class="userimg" ng-src={{p.profile.photo}}>
+        <ul>
+          <li>NAME: <span>{{p.profile.derbyName}} #{{p.profile.number}}</span></li>
+          <li>TEAM: <span>{{p.profile.team.teamName}}</span></li>
+          <li>FAV POSITION: <span>{{p.profile.favPosition}}</span></li>
+        </ul>
+        <a href="" ng-click="p.showEditInfo = true">edit</a>
+      </div>
+
+      <form ng-show="p.showEditInfo" ng-submit="p.infoSubmit()">
+        <ul>
+          <li>
+            <label for="">NAME: </label>
+            <input type="text" name="name" value="{{p.profile.derbyName}}">
+          </li>
+          <li>
+            <label for="">NUMBER: </label>
+            <input type="text" name="number" value="{{p.profile.number}}">
+          </li>
+          <li>
+            <label for="">FAV POSITION: </label>
+            <input type="text" name="name" value="{{p.profile.favPosition}}">
+          </li>
+          <li>
+            <div>
+              <label for="">PHOTO URL: </label>
+            </div>
+            <input type="text" name="img" value="{{p.profile.photo}}">
+          </li>
+        </ul>
+        <div>
+          <input type="submit" name="submit" value="submit">
+          <input type="button" name="cancel" value="cancel" ng-click="p.showEditInfo = false">
+        </div>
+      </form>
     </section>
 
     <section class="gear">
       <h1>GEAR</h1>
         <ul>
-          <li>
-            SKATES: Brand <a ng-click="rev=!rev" ng-hide="rev">review</a>
-            <div class="review" ng-init="rev=false" ng-show="rev">
+          <li ng-repeat="sg in p.gear">
+            <span>{{sg.gear.type}}</span>: {{sg.gear.brand.name}} "{{sg.gear.name}}" <a ng-click="p.showRev[sg.id] = !p.showRev[sg.id]" ng-hide="p.showRev[sg.id]">review</a>
+
+            <div class="review" ng-init="p.showRev[sg.id]=false" ng-show="p.showRev[sg.id]">
 
               <hr>
-              <p><img src="img/shoe.png" alt="">This is my second pair of skates, and they’re a lot more comfortable than my other pair.</p>
-              <p>Lorem Khaled Ipsum is a major key to success. Hammock talk come soon. Special cloth alert. Surround yourself with angels.</p>
-              <a href="#">edit</a>
+              <div ng-hide="p.showEditGear[sg.id]">
+                <p><img src="img/shoe.png">Rating: {{sg.gear.reviews[0].rating}}</p>
+                <p>{{sg.gear.reviews[0].text}}</p>
+                <a href="" ng-init="p.showEditGear[sg.id] = false" ng-click="p.showEditGear[sg.id] = !p.showEditGear[sg.id]">edit</a>
+              </div>
+
+              <form ng-show="p.showEditGear[sg.id]" ng-submit="p.sgEditSubmit(sg.id)">
+                <div>
+                  <label for="">Rating:</label>
+                  <input type="text" name="rating" value="{{sg.gear.reviews[0].rating}}">
+                </div>
+                <div>
+                  <label for="">Photo URL:</label>
+                  <input type="text" name="img" value="">
+                </div>
+                <div>
+                  <div>
+                    <label for="">Review:</label>
+                  </div>
+                  <textarea name="review" rows="8" cols="40">{{sg.gear.reviews[0].text}}</textarea>
+                </div>
+                <div>
+                  <label for="">Current Set?</label>
+                  Yes <input type="radio" name="isCurrent" ng-checked="{{sg.isCurrent}}"> |
+                  No <input type="radio" name="isCurrent" ng-checked="{{!sg.isCurrent}}" >
+                </div>
+                <div>
+                  <input type="submit" name="submit" value="submit">
+                  <input type="button" name="cancel" value="cancel"
+                    ng-click="p.showEditGear[sg.id] = !p.showEditGear[sg.id]">
+                </div>
+              </form>
+
               <hr>
 
-              <a class="right" ng-click="rev = !rev">hide review</a>
+              <a class="right" ng-click="p.showRev[sg.id] = !p.showRev[sg.id]">hide review</a>
             </div>
+
           </li>
-          <li>WHEELS: Brand <a href="#">review</a></li>
-          <li>BEARINGS: Brand <a href="#">review</a></li>
         </ul>
     </section>
 
@@ -38,8 +97,21 @@
       <!-- <h1>BIO <span>GALLERY</span></h1> -->
       <h1>BIO</h1>
       <div class="box">
-        <p>{{p.profile.summary}}</p>
-        <a href="#">edit</a>
+        <div ng-hide="p.showEditBio">
+          <p>{{p.profile.summary}}</p>
+          <a href="" ng-click="p.showEditBio = true">edit</a>
+        </div>
+        <div ng-show="p.showEditBio">
+          <form ng-submit="p.bioSubmit()">
+            <div>
+              <textarea name="bio" rows="8" cols="40">{{p.profile.summary}}</textarea>
+            </div>
+            <div>
+              <input type="submit" name="submit" value="submit">
+              <input type="button" name="cancel" value="cancel" ng-click="p.showEditBio = false">
+            </div>
+          </form>
+        </div>
       </div>
     </section>
   </div>
