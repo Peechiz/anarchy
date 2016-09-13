@@ -27,7 +27,11 @@ module.exports = [
               }
 
               var token = JWT.sign(obj, process.env.JWTKEY);
-              res({token: token, admin: skater.admin})
+              res({
+                id: skater.id,
+                admin: skater.admin,
+                token: token
+              })
             }
             else {
               res(Boom.badRequest('invalid password'))
