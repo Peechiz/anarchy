@@ -15,6 +15,7 @@ server.app.models = require('./models/index')
 const skaters = require('./api/skaters')
 const auth = require('./api/auth')
 const teams = require('./api/teams')
+const ranks = require('./api/ranks')
 // const thing = require('./api/thing')
 
 
@@ -35,21 +36,31 @@ var validate = function (decoded, req, callback) {
     // }
 };
 
+var isAdmin = function (decoded, req, cb) {
+  if (decoded.admin){
+    return cb(null, true)
+  }
+  else {
+    return cb(null, false)
+  }
+}
+
 server.register(require('hapi-auth-jwt2'), err => {
 
   if (err) {
     throw err;
   }
 
-  server.auth.strategy('jwt', 'jwt',
+  server.auth.strategy('admin', 'jwt',
     { key: process.env.JWTKEY,
-      validateFunc: validate, // validate function defined above
+      validateFunc: isAdmin, // validate function defined above
       verifyOptions: { algorithms: [ 'HS256' ] } // pick a strong algorithm
     });
 
+    server.route(auth);
     server.route(skaters);
     server.route(teams);
-    server.route(auth);
+    server.route(ranks);
 
   // server.auth.default('jwt');
 })
