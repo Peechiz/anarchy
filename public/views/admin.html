@@ -1,0 +1,52 @@
+<div class="admin">
+  <table>
+    <thead>
+      <tr>
+        <th>Photo</th>
+        <th>User</th>
+        <th>Derby Name</th>
+        <th>#</th>
+        <th>Team</th>
+        <th>Rank</th>
+        <th colspan="2">Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="skater in a.skaters">
+        <td ng-init="a.edit[skater.id]=true" ng-show="a.edit[skater.id]"><img ng-src={{skater.photo}} alt=""></td>
+        <td ng-show="a.edit[skater.id]">{{skater.userName}}</td>
+        <td ng-show="a.edit[skater.id]">{{skater.derbyName}}</td>
+        <td ng-show="a.edit[skater.id]">{{skater.number}}</td>
+        <td ng-show="a.edit[skater.id]">{{skater.team.teamName}}</td>
+        <td ng-show="a.edit[skater.id]">{{skater.rank.name}}</td>
+        <td ng-show="a.edit[skater.id]"><a href="" ng-click="a.edit[skater.id]=false">edit</a></td>
+        <td ng-show="a.edit[skater.id]"><a href="">delete</a></td>
+
+        <form ng-hide="a.edit[skater.id]" accept-charset=""action="">
+          <td ng-hide="a.edit[skater.id]">
+            <input type="text" name="photo" value="{{skater.photo}}">
+          </td>
+          <td ng-hide="a.edit[skater.id]">{{skater.userName}}</td>
+          <td ng-hide="a.edit[skater.id]">
+            <input type="text" name="derbyName" value="{{skater.derbyName}}">
+          </td>
+          <td ng-hide="a.edit[skater.id]">
+            <input type="text" name="number" value="{{skater.number}}">
+          </td>
+          <td ng-hide="a.edit[skater.id]">
+            <select class="" name="team">
+              <option ng-repeat="team in a.teams" value="{{team.teamName}}">{{team.teamName}}</option>
+            </select>
+          </td>
+          <td ng-hide="a.edit[skater.id]">
+            <select class="" name="rank">
+              <option ng-repeat="rank in a.ranks" value="{{rank.name}}">{{rank.name}}</option>
+            </select>
+          </td>
+          <td ng-hide="a.edit[skater.id]"><a href="">submit</a></td>
+        </form>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
