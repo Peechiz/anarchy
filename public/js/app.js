@@ -16,10 +16,13 @@ app.factory('api', ['$http', ($http)=>{
 }])
 
 app.factory('profile', ['$localStorage', 'api', ($localStorage, api)=>{
+  const id = $localStorage.currentUser.id;
   return {
     getProfile: () => {
-      const id = $localStorage.currentUser.id;
       return api.getSkater(id);
+    },
+    getGear: () => {
+      return api.getSkaterGear(id);
     }
   }
 }])
