@@ -10,7 +10,8 @@ var models =  {
   Reviews: db.import(__dirname + '/' + 'reviews'),
   Gears: db.import(__dirname + '/' + 'gears'),
   Brands: db.import(__dirname + '/' + 'brands'),
-  Teams: db.import(__dirname + '/' + 'teams')
+  Teams: db.import(__dirname + '/' + 'teams'),
+  Ranks: db.import(__dirname + '/' + 'ranks')
 };
 
 // create relationships between models.
@@ -18,6 +19,9 @@ console.log('creating relationships...');
 (function (m) {
   m.Teams.hasMany(m.Skaters);
   m.Skaters.belongsTo(m.Teams);
+
+  m.Ranks.hasMany(m.Skaters, {foreignKey: 'rankId'});
+  m.Skaters.belongsTo(m.Ranks, {foreignKey: 'rankId'});
 
   m.Skaters.hasMany(m.SkatersGears,{foreignKey: 'skaterId'});
   m.SkatersGears.belongsTo(m.Skaters,{foreignKey: 'skaterId'});
