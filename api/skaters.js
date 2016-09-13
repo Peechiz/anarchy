@@ -33,7 +33,7 @@ module.exports = [{
       const m = req.server.app.models;
       m.SkatersGears.findAll({
         where: {skaterId: req.params.id},
-        attributes: ['isCurrent'],
+        attributes: ['isCurrent','id'],
         include: [{
           model: m.Gears,
           attributes: ['name', 'type'],
