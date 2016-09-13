@@ -6,11 +6,22 @@ var app = angular.module('anarchy',['ngStorage','routes']);
 app.factory('api', ['$http', ($http)=>{
   var api = {};
 
-  api.getTeams = function(){
-    return $http.get('/api/teams')
-  }
+  api.getTeams = () => $http.get('/api/teams');
+  api.getSkaters = () => $http.get('/api/skaters');
+  api.getSkater = id => $http.get(`/api/skaters/${id}`)
+  api.getRanks = () => $http.get('/api/ranks');
+  api.getSkaterGear = id => $http.get(`/api/skaters/${id}/gear`);
 
   return api;
+}])
+
+app.factory('profile', ['$localStorage', 'api', ($localStorage, api)=>{
+  return {
+    getProfile: () => {
+      const id = $localStorage.currentUser.id;
+      return api.getSkater(id);
+    }
+  }
 }])
 
 app.factory('auth', ['$http', '$localStorage', ($http, $localStorage) => {
@@ -27,7 +38,12 @@ app.factory('auth', ['$http', '$localStorage', ($http, $localStorage) => {
         // login successful if there's a token in the response
        if (response.token) {
            // store username and token in local storage to keep user logged in between page refreshes
-           $localStorage.currentUser = { userName: userName, admin: response.admin, token: response.token };
+           $localStorage.currentUser = {
+             userName: userName,
+             id: response.id,
+             admin: response.admin,
+             token: response.token
+           };
 
            // add jwt token to auth header for all requests made by the $http service
            $http.defaults.headers.common.Authorization = 'Bearer ' + response.token;
