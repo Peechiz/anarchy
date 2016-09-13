@@ -14,7 +14,13 @@
         favPosition: DataTypes.STRING,
         photo: DataTypes.STRING,
         admin: DataTypes.BOOLEAN,
-        rank: DataTypes.STRING,
+        rankId: {
+          type: DataTypes.INTEGER,
+          references: {
+            model: 'Ranks',
+            key: 'id'
+          }
+        },
         summary: DataTypes.TEXT,
         password: DataTypes.STRING
       }, {
