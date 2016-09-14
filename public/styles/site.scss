@@ -63,6 +63,14 @@ header {
       margin-bottom: 5px;
     }
   }
+  .error {
+    color: $blood;
+    text-transform: lowercase;
+    font-size: .7em;
+    position: absolute;
+    margin: 20px 0 0 65px;
+    display: inline-block;
+  }
   ul {
     margin: 0;
     float: right;

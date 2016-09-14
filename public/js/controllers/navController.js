@@ -7,7 +7,7 @@ function navController($scope, $location, $window, auth, $localStorage){
 
   n.hasLogin = $localStorage.currentUser ? true : false;
   n.form = false;
-
+  n.error = false;
   n.nav = {
     profile: false,
     teams: false,
@@ -44,16 +44,21 @@ function navController($scope, $location, $window, auth, $localStorage){
   n.auth = auth;
 
   n.cb = function(result){
-    if (result){
+    console.log(result);
+    if (result === true){
       console.log('logged in');
       n.form = false;
+      n.error = false;
       n.hasLogin = true;
       $window.location.href = $location.path;
       $window.location.reload();
 
     }
     else {
-      console.log('there was a problem logging in.');
+      // console.log('there was a problem logging in.');
+      console.log(result.data.message);
+      n.error = true;
+      n.msg = result.data.message;
     }
   }
 

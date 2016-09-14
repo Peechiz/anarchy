@@ -35,6 +35,7 @@
       <li ng-hide="n.hasLogin || n.form"><a href="" ng-click="n.form = true">Log In</a></li>
       <li ng-show="n.form">
         <form ng-submit="n.login(n.user,n.pass,n.cb)">
+          <span ng-show="n.error" class="error">{{n.msg}}</span>
           <label for="">User Name: </label>
           <input type="text" name="userName"
           ng-model="n.user">

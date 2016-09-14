@@ -34,13 +34,13 @@ module.exports = [
               })
             }
             else {
-              res(Boom.badRequest('invalid password'))
+              res(Boom.badRequest('incorrect username or password'))
             }
 
           }
           else {
             // couldn't find the skater
-            res(Boom.notFound('skater not found'))
+            res(Boom.badRequest('incorrect username or password'))
           }
         })
       }

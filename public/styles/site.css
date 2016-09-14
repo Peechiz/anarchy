@@ -42,6 +42,13 @@ header {
     header .logo span > img {
       position: relative;
       margin-bottom: 5px; }
+  header .error {
+    color: #BA141A;
+    text-transform: lowercase;
+    font-size: .7em;
+    position: absolute;
+    margin: 20px 0 0 65px;
+    display: inline-block; }
   header ul {
     margin: 0;
     float: right; }
