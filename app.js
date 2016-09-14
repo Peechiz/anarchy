@@ -16,6 +16,8 @@ const skaters = require('./api/skaters')
 const auth = require('./api/auth')
 const teams = require('./api/teams')
 const ranks = require('./api/ranks')
+const brands = require('./api/brands')
+const gear = require('./api/gear')
 // const thing = require('./api/thing')
 
 
@@ -61,6 +63,8 @@ server.register(require('hapi-auth-jwt2'), err => {
     server.route(skaters);
     server.route(teams);
     server.route(ranks);
+    server.route(brands);
+    server.route(gear);
 
   // server.auth.default('jwt');
 })
