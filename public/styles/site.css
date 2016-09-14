@@ -180,6 +180,8 @@ main {
     min-width: 260px; }
   .profile h1 span {
     color: #4A4A4A; }
+  .profile h1 .selected {
+    color: white; }
   .profile .info ul {
     list-style-type: none; }
     .profile .info ul span {
