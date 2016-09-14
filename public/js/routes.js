@@ -11,8 +11,10 @@ angular.module('routes',['ngRoute'])
         return profile.getProfile()
       },
       gear: (profile) => {
-        console.log('getting gear');
         return profile.getGear()
+      },
+      brands: (api) => {
+        return api.getBrands();
       }
     }
   })

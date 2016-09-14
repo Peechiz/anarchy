@@ -8,9 +8,26 @@ app.factory('api', ['$http', ($http)=>{
 
   api.getTeams = () => $http.get('/api/teams');
   api.getSkaters = () => $http.get('/api/skaters');
-  api.getSkater = id => $http.get(`/api/skaters/${id}`)
+  api.getSkater = id => $http.get(`/api/skaters/${id}`);
+  api.getBrands = () => $http.get('/api/brands');
   api.getRanks = () => $http.get('/api/ranks');
   api.getSkaterGear = id => $http.get(`/api/skaters/${id}/gear`);
+
+  api.addBrand = data => {
+    return $http.post('/api/brands', data)
+  };
+  api.addGear = data => {
+    return $http.post('/api/gear', data)
+  };
+  api.addSkaterGear = (id, data) => {
+    return $http.post(`/api/skater/${id}/gear`, data)
+  };
+  api.updateSkaterInfo = (id, data) => {
+    return $http.put(`/api/skaters/${id}/info`, data)
+  };
+  api.updateSkaterBio = (id, data) => {
+    return $http.put(`/api/skaters/${id}/bio`, data)
+  };
 
   return api;
 }])
