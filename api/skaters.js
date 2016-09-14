@@ -88,14 +88,94 @@ module.exports = [{
   config: {
     handler: (req,res) => {
       const m = req.server.app.models;
-      m.SkatersGears.create({
-        skaterId: req.params.id,
-        gearId: req.payload.gearId,
-        img: req.payload.img,
-        isCurrent: req.payload.isCurrent
-      }).then(result=>{
-        res(result.toJSON())
-      })
+      const db = m.db;
+      console.log('DOING THE THING!');
+      // BIG TRANSACTION
+        // 1. if brand ~ String =>
+      if (req.payload.newBrand){
+        db.transaction(t => {
+          // make new brand
+          return m.Brands.create({
+            name: req.payload.brand
+          },{ transaction: t })
+          .then(brand => {
+            console.log('BRAND:',brand);
+            // make new gear with newBrandId
+            return m.Gears.create({
+              name: req.payload.name,
+              type: req.payload.type,
+              brandId: brand.id
+            },{ transaction: t })
+          }).then(gear => {
+            console.log('GEAR:', gear);
+
+            // make new skaters_gears with gearID
+            return db.transaction(t2 => {
+              return m.SkatersGears.create({
+                skaterId: req.params.id,
+                gearId: gear.id,
+                img: req.payload.img,
+                isCurrent: req.payload.isCurrent
+              }, {transaction: t}).then(sg=>{
+                // insert the review
+                return m.Reviews.create({
+                  skaterId: req.params.id,
+                  gearId: gear.id,
+                  text: req.payload.review,
+                  rating: req.payload.rating
+                },{transaction: t})
+              })
+            })
+
+          })
+        }).then(result => {
+          console.log('RESULT!');
+          res('congrats you did it')
+        }).catch(err => {
+          console.log(err);
+          res('something went horribly wrong')
+        })
+
+      } else {
+        // 2. if brand ~ INTEGER
+        db.transaction(function (t) {
+          // find or create gear
+          return m.Gears.findOrCreate({
+            where: {
+              brandId: req.payload.brand,
+              name: req.payload.name,
+              type: req.payload.type
+            },
+            transaction: t
+          }).spread((gear,created)=>{
+            // console.log(gear,created);
+            // make new skaters_gears with gearID
+            return db.transaction(t2 => {
+              return m.SkatersGears.create({
+                skaterId: req.params.id,
+                gearId: gear.id,
+                img: req.payload.img,
+                isCurrent: req.payload.isCurrent
+              }, {transaction: t}).then(sg=>{
+                // insert the review
+                return m.Reviews.create({
+                  skaterId: req.params.id,
+                  gearId: gear.id,
+                  text: req.payload.review,
+                  rating: req.payload.rating
+                },{transaction: t})
+              })
+            })
+          })
+        }).then(function (result) {
+          console.log('RESULT!');
+          res('congrats you did it')
+        }).catch(function (err) {
+          console.log(err);
+          res('something went horribly wrong')
+        });
+
+      }
     }
   }
 },{

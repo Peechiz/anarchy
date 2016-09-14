@@ -20,7 +20,7 @@ function profileController(profile, gear, brands, api, $localStorage, $window){
     photo: p.profile.photo
   };
   p.addGear = {
-    show: false
+    show: false,
   };
   p.showNewBrand = false;
   p.showEditInfo = false;
@@ -38,50 +38,27 @@ function profileController(profile, gear, brands, api, $localStorage, $window){
     }
   }
 
-  p.sgEdit = id => {
-    console.log('submitting edit!',id);
+  p.sgEdit = () => {
+    console.log('submitting edit!');
   }
 
-  p.sgNew = id => {
+  p.sgNew = () => {
     console.log('submitting new gear!');
     // if new brand, submit new brand
     var brandId;
-    if (p.addGear.brand === 'new'){
-      api.addBrand({
-        name: p.newBrand
-      }).then(result => {
-        brandId = result.toJSON().id;
-        return submitGear(brandId);
-      }).then( newGear => {
-        return submitSG(newGear.id)
-      }).then( result => {
-        console.log('added new brand and everything');
-      })
+    var data = {
+      name: p.addGear.name,
+      type: p.addGear.type,
+      newBrand: p.newBrand ? true : false,
+      brand: p.newBrand || p.addGear.brand, // str || id
+      img:  p.addGear.img,
+      isCurrent: p.addGear.isCurrent,
+      rating: p.addGear.rating,
+      review: p.addGear.review
     }
-    else {
-      submitGear(p.addGear.brand)
-      .then(newGear => {
-        return submitSG(newGear.id)
-      }).then( result => {
-        console.log('added new skater gear with existing brand');
-      })
-    }
-    // then submit name, type, brandId to Gears
-    function submitGear(brandId){
-      return api.addGear({
-        name: p.addGear.name,
-        type: p.addGear.type,
-        brandId: brandId
-      })
-    }
-    // then submit userId, gearId to SkaterGears
-    function submitSG(gearId){
-      return api.addSkaterGear(id,{
-        gearId: gearId,
-        img: p.addGear.img,
-        isCurrent: p.addGear.isCurrent
-      })
-    }
+    api.addSkaterGear(id,data).then(result=>{
+      console.log(result);
+    })
   }
 
   p.bioSubmit = () => {
