@@ -181,9 +181,15 @@ main {
   .profile .gear ul li {
     clear: both;
     margin-bottom: 10px; }
+    .profile .gear ul li span {
+      text-transform: uppercase; }
     .profile .gear ul li .right {
       float: right; }
-  .profile .gear .review > p > img {
+  .profile .gear .review a {
+    display: block;
+    clear: both;
+    margin-top: 10px; }
+  .profile .gear .review p > img {
     float: left;
     margin: 0 10px 0 0;
     max-height: 70px;
