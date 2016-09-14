@@ -47,9 +47,14 @@
     </section>
 
     <section class="gear">
-      <h1>GEAR <span>OLD GEAR</span></h1>
+      <h1>
+        <span ng-click="p.select('gear'); p.sort = true;"
+        ng-class="{'selected': p.selection.gear}">GEAR</span>
+         <span ng-click="p.select('old'); p.sort = false;"
+         ng-class="{'selected': p.selection.old}">OLD GEAR</span>
+     </h1>
         <ul>
-          <li ng-repeat="sg in p.gear">
+          <li ng-repeat="sg in p.gear | filter : {isCurrent: p.sort}">
             <span>{{sg.gear.type}}</span>: {{sg.gear.brand.name}} "{{sg.gear.name}}" <a ng-click="p.showRev[sg.id] = !p.showRev[sg.id]" ng-hide="p.showRev[sg.id]">review</a>
 
             <div class="review"  ng-init="p.showRev[sg.id]=false" ng-show="p.showRev[sg.id]">

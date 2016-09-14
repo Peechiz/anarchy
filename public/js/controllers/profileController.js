@@ -10,6 +10,7 @@ function profileController(profile, gear, brands, api, $localStorage, $window){
   p.profile = profile.data;
   p.gear = gear.data;
   p.brands = brands.data;
+  p.sort = true;
 
   p.showRev = {};
   p.showEditGear = {};
@@ -28,6 +29,19 @@ function profileController(profile, gear, brands, api, $localStorage, $window){
   // p.showReview = function(id){
   //   p.g[id] = !p.g[id]
   // }
+  p.selection = {
+    gear: true,
+    old: false
+  };
+  p.select = function(key){
+    if (key === 'gear'){
+      p.selection.gear = true;
+      p.selection.old = false;
+    } else {
+      p.selection.old = true;
+      p.selection.gear = false;
+    }
+  }
 
   p.checkNew = () => {
     if (p.addGear.brand === "new"){
