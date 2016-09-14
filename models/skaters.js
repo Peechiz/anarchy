@@ -1,6 +1,10 @@
 'use strict';
     module.exports = function(sequelize, DataTypes) {
       var Skaters = sequelize.define('skaters', {
+        id: {
+          type: DataTypes.INTEGER,
+          primaryKey: true
+        },
         userName: DataTypes.STRING,
         derbyName: DataTypes.STRING,
         number: DataTypes.STRING,
