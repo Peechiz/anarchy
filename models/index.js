@@ -40,5 +40,4 @@ console.log('creating relationships...');
 })(models);
 
 module.exports = models;
-// module.exports.Sequelize = db.sequelize;
-// module.exports.Sequelize = db.Sequelize;
+module.exports.db = db;
