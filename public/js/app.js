@@ -1,9 +1,9 @@
 'use strict'
 
 console.log('app.js loaded');
-var app = angular.module('anarchy',['ngStorage','routes']);
+var app = angular.module('anarchy', ['ngStorage', 'routes']);
 
-app.factory('api', ['$http', ($http)=>{
+app.factory('api', ['$http', ($http) => {
   var api = {};
 
   api.getTeams = () => $http.get('/api/teams');
@@ -32,7 +32,7 @@ app.factory('api', ['$http', ($http)=>{
   return api;
 }])
 
-app.factory('profile', ['$localStorage', 'api', ($localStorage, api)=>{
+app.factory('profile', ['$localStorage', 'api', ($localStorage, api) => {
   const id = $localStorage.currentUser.id;
   return {
     getProfile: () => {
@@ -52,32 +52,39 @@ app.factory('auth', ['$http', '$localStorage', ($http, $localStorage) => {
 
   return auth;
 
-  function login(userName, password, callback){
-    $http.post('/api/auth', {userName: userName, password: password})
-      .success(response => {
+  function login(userName, password, callback) {
+    $http.post('/api/auth', {
+        userName: userName,
+        password: password
+      })
+      .then(success => {
         // login successful if there's a token in the response
-       if (response.token) {
-           // store username and token in local storage to keep user logged in between page refreshes
-           $localStorage.currentUser = {
-             userName: userName,
-             id: response.id,
-             admin: response.admin,
-             token: response.token
-           };
+        console.log('success', success);
+        success = success.data;
+        if (success.token) {
+          // store username and token in local storage to keep user logged in between page refreshes
+          $localStorage.currentUser = {
+            userName: userName,
+            id: success.id,
+            admin: success.admin,
+            token: success.token
+          };
 
-           // add jwt token to auth header for all requests made by the $http service
-           $http.defaults.headers.common.Authorization = 'Bearer ' + response.token;
+          // add jwt token to auth header for all requests made by the $http service
+          $http.defaults.headers.common.Authorization = 'Bearer ' + success.token;
 
-           // execute callback with true to indicate successful login
-           callback(true);
-       } else {
-           // execute callback with false to indicate failed login
-           callback(false);
-       }
+          // execute callback with true to indicate successful login
+          return callback(true);
+        } else {
+          // execute callback with false to indicate failed login
+          return callback(false);
+        }
+      }, fail => {
+        return callback(fail)
       })
   }
 
-  function logout(){
+  function logout() {
     delete $localStorage.currentUser;
     $http.defaults.headers.common.Authorization = '';
     // post to api/logout, remove admin thing marker
