@@ -13,7 +13,7 @@ module.exports = [
         Skaters.findAll({
           where: {userName: req.payload.userName}
         }).then(data => {
-          console.log('DATA:',data);
+          // console.log('DATA:',data);
           if (data.length){
             // found the skater
             var skater = data[0].toJSON();
