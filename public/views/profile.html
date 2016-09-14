@@ -78,8 +78,8 @@
                 </div>
                 <div>
                   <label for="">Current Setup?</label>
-                  Yes <input type="radio" name="isCurrent" ng-checked="{{sg.isCurrent}}"> |
-                  No <input type="radio" name="isCurrent" ng-checked="{{!sg.isCurrent}}" >
+                  Yes <input type="radio" ng-checked="{{sg.isCurrent}}" name="check"> |
+                  No <input type="radio"  ng-checked="{{!sg.isCurrent}}" name="check">
                 </div>
                 <div>
                   <input type="submit" name="submit" value="submit">
@@ -97,7 +97,7 @@
         </ul>
         <a href="" ng-click="p.showAddGear = true" ng-hide="p.showAddGear">Add Gear</a>
 
-        <form ng-show="p.showAddGear">
+        <form ng-show="p.showAddGear" ng-submit="p.sgNew()">
           <div>
             <label for="">Name:</label>
             <input type="text" ng-model="p.addGear.name" value="">
@@ -105,7 +105,7 @@
           <div>
             <label for="">Brand:</label>
             <select ng-model="p.addGear.brand" ngChange="{{p.checkNew()}}" class="" name="">
-              <option ng-repeat="brand in p.brands" value="{{brand.name}}" default>{{brand.name}}</option>
+              <option ng-repeat="brand in p.brands" value="{{brand.id}}" default>{{brand.name}}</option>
               <option value="new">new</option>
             </select>
             <span ng-show="p.showNewBrand">
@@ -132,18 +132,22 @@
             <input type="text" ng-model="p.addGear.img" value="">
           </div>
           <div>
-            <label for="">Current Setup?</label>
-            Yes <input type="radio" ng-model="p.addGear.isCurrent" checked>
-            No <input type="radio" ng-model="p.addGear.isCurrent" >
+            <label for="" ng-init="p.addGear.isCurrent=true">Current Setup?</label>
+            Yes <input type="radio"
+                checked name="setup"
+                ng-click="p.addGear.isCurrent = true">
+            No <input type="radio"
+                name="setup"
+                ng-click="p.addGear.isCurrent = false">
           </div>
           <div>
             <label for="">Rating: </label>
-            <input type="text"  value="">
+            <input type="text" ng-model="p.addGear.rating">
           </div>
           <div>
             <label for="">Review: </label>
             <div>
-              <textarea name="name" rows="8" cols="40"></textarea>
+              <textarea name="name" rows="8" cols="40" ng-model="p.addGear.review"></textarea>
             </div>
           </div>
           <div>
