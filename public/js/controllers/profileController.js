@@ -86,7 +86,7 @@ function profileController(profile, gear, brands, api, mayEdit, $route, $localSt
     console.log(data);
     api.updateSkaterGear(id,data,gearId).then(result=>{
       console.log(result);
-      // $window.location.reload();
+      $window.location.reload();
     })
   }
   p.sgNew = () => {
