@@ -15,7 +15,29 @@ angular.module('routes',['ngRoute'])
       },
       brands: (api) => {
         return api.getBrands();
+      },
+      mayEdit: () => {
+        return true
       }
+    }
+  })
+  .when('/skaters/:id', {
+    templateUrl: 'views/profile.html',
+    controller: 'profileController as p',
+    resolve: {
+      profile: ($route, api) => {
+        return api.getSkater($route.current.params.id)
+      },
+      gear: ($route, api) => {
+        return api.getSkaterGear($route.current.params.id)
+      },
+      brands: (api) => {
+        return api.getBrands();
+      },
+      mayEdit: (edit) => {
+        return edit.mayEdit();
+      }
+
     }
   })
   .when('/',{
@@ -41,6 +63,11 @@ angular.module('routes',['ngRoute'])
   })
   .when('/teams', {
     templateUrl: 'views/teams.html',
-    controller: 'teamsController as t'
+    controller: 'teamsController as t',
+    resolve: {
+      teams: (api) => {
+        return api.getTeams();
+      }
+    }
   })
 });
