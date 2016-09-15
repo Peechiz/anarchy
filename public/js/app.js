@@ -62,16 +62,26 @@ app.factory('edit', ['$localStorage', '$route', ($localStorage, $route)=>{
       return authorized;
     }
   }
-
 }])
 
-app.factory('auth', ['$http', '$localStorage', ($http, $localStorage) => {
+app.factory('auth', ['$http', '$localStorage' , ($http, $localStorage) => {
   var auth = {}
 
   auth.Login = login;
   auth.Logout = logout;
+  auth.isAdmin = isAdmin;
 
   return auth;
+
+  function isAdmin(){
+    var admin;
+    try {
+      return $localStorage.currentUser.admin;
+    } catch (err) {
+      return false;
+    }
+
+  }
 
   function login(userName, password, callback) {
     $http.post('/api/auth', {

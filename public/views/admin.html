@@ -1,4 +1,4 @@
-<div class="admin">
+<div class="admin" ng-if="a.isAdmin">
   <table>
     <thead>
       <tr>
@@ -49,4 +49,8 @@
       </tr>
     </tbody>
   </table>
+</div>
+
+<div ng-if="!a.isAdmin" style="width: 100%; display: flex; justify-content: center;">
+  <img src="https://http.cat/401.jpg" alt="">
 </div>

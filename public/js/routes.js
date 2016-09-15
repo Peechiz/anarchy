@@ -55,11 +55,11 @@ angular.module('routes',['ngRoute'])
   .when('/admin', {
     templateUrl: 'views/admin.html',
     controller: 'adminController as a',
-    // resolve: {
-    //   admin: (admin)=>{
-    //     return admin.isAdmin();
-    //   }
-    // }
+    resolve: {
+      isAdmin: auth => {
+        return auth.isAdmin();
+      }
+    }
   })
   .when('/teams', {
     templateUrl: 'views/teams.html',
