@@ -58,6 +58,13 @@ angular.module('routes',['ngRoute'])
     resolve: {
       isAdmin: auth => {
         return auth.isAdmin();
+      },
+      ranks: (api, $http, $localStorage) => {
+        $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
+        return api.getRanks()
+      },
+      teams: (api) => {
+        return api.getTeams();
       }
     }
   })
