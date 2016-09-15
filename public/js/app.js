@@ -19,6 +19,9 @@ app.factory('api', ['$http', ($http) => {
   api.addGear = data => {
     return $http.post('/api/gear', data)
   };
+  api.updateSkaterGear = (id, data, gearId) => {
+    return $http.put(`/api/skaters/${id}/gear/${gearId}`, data)
+  }
   api.addSkaterGear = (id, data) => {
     return $http.post(`/api/skaters/${id}/gear`, data)
   };
@@ -42,6 +45,21 @@ app.factory('profile', ['$localStorage', 'api', ($localStorage, api) => {
       return api.getSkaterGear(id);
     }
   }
+}])
+
+app.factory('edit', ['$localStorage', '$route', ($localStorage, $route)=>{
+
+  return {
+    mayEdit: () => {
+      var id = $localStorage.currentUser.id;
+      var admin = $localStorage.currentUser.admin;
+      var pathId = $route.current.params.id;
+      var authorized = id == pathId || admin;
+
+      return authorized;
+    }
+  }
+
 }])
 
 app.factory('auth', ['$http', '$localStorage', ($http, $localStorage) => {
