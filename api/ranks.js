@@ -3,6 +3,7 @@ module.exports = [
     method: 'GET',
     path: '/api/ranks',
     config: {
+      auth: 'admin',
       handler: function(req,res){
         const m = req.server.app.models
         m.Ranks.findAll().then(ranks=>{
@@ -20,8 +21,8 @@ module.exports = [
         m.Ranks.findOne({
           attributes: ['name'],
           where: {id: req.params.id},
-        }).then(team=>{
-          res(team.toJSON());
+        }).then(rank=>{
+          res(rank.toJSON());
         })
       }
     }

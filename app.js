@@ -39,6 +39,15 @@ var validate = function (decoded, req, callback) {
     // }
 };
 
+var author = function(decoded, req, cb) {
+  if (req.params.id == decoded.id || decoded.admin ) {
+    return cb(null, true)
+  }
+  else {
+    return cb(null, false)
+  }
+}
+
 var isAdmin = function (decoded, req, cb) {
   if (decoded.admin){
     return cb(null, true)
@@ -57,6 +66,12 @@ server.register(require('hapi-auth-jwt2'), err => {
   server.auth.strategy('admin', 'jwt',
     { key: process.env.JWTKEY,
       validateFunc: isAdmin, // validate function defined above
+      verifyOptions: { algorithms: [ 'HS256' ] } // pick a strong algorithm
+    });
+
+  server.auth.strategy('author', 'jwt',
+    { key: process.env.JWTKEY,
+      validateFunc: author, // validate function defined above
       verifyOptions: { algorithms: [ 'HS256' ] } // pick a strong algorithm
     });
 

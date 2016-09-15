@@ -4,7 +4,6 @@ module.exports = [
     path: '/api/teams',
     config: {
       handler: function(req,res){
-        console.log('in teams!');
         const m = req.server.app.models
         m.Teams.findAll({
           attributes: ['teamName'],

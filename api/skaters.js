@@ -54,6 +54,7 @@ module.exports = [{
   method: 'PUT',
   path: '/api/skaters/{id}/info',
   config: {
+    auth: 'author',
     handler: (req,res) => {
       const m = req.server.app.models
       console.log('PAYLOAD:', req.payload);
@@ -72,6 +73,7 @@ module.exports = [{
   method: 'PUT',
   path: '/api/skaters/{id}/bio',
   config: {
+    auth: 'author',
     handler: (req,res) => {
       const m = req.server.app.models
       m.Skaters.upsert({
@@ -86,6 +88,7 @@ module.exports = [{
   method: 'POST',
   path: '/api/skaters/{id}/gear',
   config: {
+    auth: 'author',
     handler: (req,res) => {
       const m = req.server.app.models;
       const db = m.db;
@@ -182,6 +185,7 @@ module.exports = [{
   method: 'PUT',
   path: '/api/skaters/{id}/gear/{gearId}',
   config: {
+    auth: 'author',
     handler: (req,res) => {
       const m = req.server.app.models;
       const db = m.db;
@@ -230,6 +234,24 @@ module.exports = [{
         where: {id: req.params.id}
       }).then(numKilled => {
         res('deleted ' + numKilled )
+      })
+    }
+  }
+},{
+  method: 'DELETE',
+  path: '/api/skaters/{id}/gear/{gearId}',
+  config: {
+    auth: 'author',
+    handler: (req,res) => {
+      const m = req.server.app.models;
+
+      m.SkatersGears.destroy({
+        where: {
+          skaterId: req.params.id,
+          gearId: req.params.gearId
+        }
+      }).then(numKilled => {
+        res('deleted ' + numKilled)
       })
     }
   }
