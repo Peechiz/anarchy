@@ -6,7 +6,7 @@ module.exports = [
       handler: function(req,res){
         const m = req.server.app.models
         m.Teams.findAll({
-          attributes: ['teamName'],
+          attributes: ['teamName', 'id'],
           include: [{
             model: m.Skaters,
             attributes: [

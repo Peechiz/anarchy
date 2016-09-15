@@ -85,6 +85,22 @@ module.exports = [{
     }
   }
 },{
+  method: 'PUT',
+  path: '/api/skaters/{id}',
+  config: {
+    auth: 'admin',
+    handler: (req,res)=>{
+      const m = req.server.app.models;
+      m.Skaters.upsert({
+        id: req.params.id,
+        teamId: req.payload.team,
+        rankId: req.payload.rank
+      }).then(result=>{
+        res(result)
+      })
+    }
+  }
+},{
   method: 'POST',
   path: '/api/skaters/{id}/gear',
   config: {

@@ -1,4 +1,9 @@
 <div class="admin" ng-if="a.isAdmin">
+  <h1><span>SKATERS</span> <span>ADD</span></h1>
+  <div class="ctrls">
+    <p><a href="">Sort By:</a></p>
+    <p><a href="">Hide Pending</a></p>
+  </div>
   <table>
     <thead>
       <tr>
@@ -22,28 +27,37 @@
         <td ng-show="a.edit[skater.id]"><a href="" ng-click="a.edit[skater.id]=false">edit</a></td>
         <td ng-show="a.edit[skater.id]"><a href="">delete</a></td>
 
-        <form ng-hide="a.edit[skater.id]" accept-charset=""action="">
+<!-- EDIT -->
+        <form
+        ng-hide="a.edit[skater.id]" accept-charset=""action="">
           <td ng-hide="a.edit[skater.id]">
-            <input type="text" name="photo" value="{{skater.photo}}">
+            <img ng-src={{skater.photo}}>
           </td>
           <td ng-hide="a.edit[skater.id]">{{skater.userName}}</td>
           <td ng-hide="a.edit[skater.id]">
-            <input type="text" name="derbyName" value="{{skater.derbyName}}">
+            {{skater.derbyName}}"
           </td>
           <td ng-hide="a.edit[skater.id]">
-            <input type="text" name="number" value="{{skater.number}}">
+            {{skater.number}}
           </td>
           <td ng-hide="a.edit[skater.id]">
-            <select class="" name="team">
-              <option ng-repeat="team in a.teams" value="{{team.teamName}}">{{team.teamName}}</option>
+            <select
+              ng-model="a.data.skaters[skater.id].team"
+              ng-options="team as team.teamName for team in a.teams track by team.id">
             </select>
           </td>
           <td ng-hide="a.edit[skater.id]">
-            <select class="" name="rank">
-              <option ng-repeat="rank in a.ranks" value="{{rank.name}}">{{rank.name}}</option>
+            <select
+            ng-model="a.data.skaters[skater.id].rank"
+            ng-options="rank as rank.name for rank in a.ranks track by rank.id">
             </select>
           </td>
-          <td ng-hide="a.edit[skater.id]"><a href="">submit</a></td>
+          <td ng-hide="a.edit[skater.id]"
+            ng-click="a.editSkater(skater.id)"><a href="">submit</a>
+          </td>
+          <td ng-hide="a.edit[skater.id]">
+            <a href="" ng-click="a.edit[skater.id] = true">cancel</a>
+          </td>
         </form>
 
       </tr>

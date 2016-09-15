@@ -34,6 +34,9 @@ app.factory('api', ['$http', ($http) => {
   api.updateSkaterBio = (id, data) => {
     return $http.put(`/api/skaters/${id}/bio`, data)
   };
+  api.updateSkater = (id,data) => {
+    return $http.put(`/api/skaters/${id}`, data)
+  }
 
   return api;
 }])
