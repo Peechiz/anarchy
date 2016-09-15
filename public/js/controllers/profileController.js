@@ -94,6 +94,13 @@ function profileController(profile, gear, brands, api, mayEdit, $route, $localSt
     skaterGear('addGear', 'addSkaterGear')
   }
 
+  p.sgDelete = gearId => {
+    api.deleteSkaterGear(id,gearId).then(result=>{
+      console.log(result);
+      $window.location.reload();
+    })
+  }
+
   function skaterGear(location, httpMethod, gearId){
     var data = {
       name: p[location].name,

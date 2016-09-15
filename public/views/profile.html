@@ -66,7 +66,7 @@
               <p><img ng-src="{{sg.img}}">Rating: {{sg.gear.reviews[0].rating || "no rating"}}</p>
               <p>{{sg.gear.reviews[0].text || "no review"}}</p>
               <a href="" ng-if="p.mayEdit" ng-click="p.editGear[sg.id].show = !p.editGear[sg.id].show" ng-init="p.editGear[sg.id].show = false">edit</a>
-
+              <a href="" ng-if="p.mayEdit" ng-click="p.sgDelete(sg.gear.id)">delete</a>
             </div>
 
 

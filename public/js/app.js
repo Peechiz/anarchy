@@ -25,6 +25,9 @@ app.factory('api', ['$http', ($http) => {
   api.addSkaterGear = (id, data) => {
     return $http.post(`/api/skaters/${id}/gear`, data)
   };
+  api.deleteSkaterGear = (id,gearId) => {
+    return $http.delete(`/api/skaters/${id}/gear/${gearId}`)
+  }
   api.updateSkaterInfo = (id, data) => {
     return $http.put(`/api/skaters/${id}/info`, data)
   };
