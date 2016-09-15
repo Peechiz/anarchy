@@ -1,9 +1,9 @@
-<!-- this is everything inside the ng-view in index.html. -->
-<!-- see 15_Week/tea for help... -->
 <main>
+
+<!-- SHOW PROFILE -->
   <div class="profile">
     <section class="info">
-      <h1>PROFILE</h1>
+      <h1><span ng-if="p.mayEdit">MY </span>PROFILE</h1>
       <div ng-if="!p.showEditInfo">
         <img class="userimg" ng-src={{p.profile.photo}}>
         <ul>
@@ -11,32 +11,31 @@
           <li>TEAM: <span>{{p.profile.team.teamName}}</span></li>
           <li>FAV POSITION: <span>{{p.profile.favPosition}}</span></li>
         </ul>
-        <a href="" ng-click="p.showEditInfo = true">edit</a>
+        <a href="" ng-if="p.mayEdit" ng-click="p.showEditInfo = true">edit</a>
       </div>
 
+
+
+<!-- EDIT PROFILE -->
       <form ng-show="p.showEditInfo" ng-submit="p.infoSubmit()">
         <ul>
           <li>
             <label for="">DERBY NAME: </label>
-            <input type="text" name="derbyName"
-            ng-model="p.info.derbyName">
+            <input type="text" name="derbyName" ng-model="p.info.derbyName">
           </li>
           <li>
             <label for="">NUMBER: </label>
-            <input type="text" name="number"
-            ng-model="p.info.number">
+            <input type="text" name="number" ng-model="p.info.number">
           </li>
           <li>
             <label for="">FAV POSITION: </label>
-            <input type="text" name="name"
-            ng-model="p.info.favPosition">
+            <input type="text" name="name" ng-model="p.info.favPosition">
           </li>
           <li>
             <div>
               <label for="">PHOTO URL: </label>
             </div>
-            <input type="text" name="photo"
-            ng-model="p.info.photo">
+            <input type="text" name="photo" ng-model="p.info.photo">
           </li>
         </ul>
         <div>
@@ -46,129 +45,174 @@
       </form>
     </section>
 
+
+
+<!-- SHOW GEAR -->
     <section class="gear">
       <h1>
         <span ng-click="p.select('gear'); p.sort = true;"
         ng-class="{'selected': p.selection.gear}">GEAR</span>
          <span ng-click="p.select('old'); p.sort = false;"
          ng-class="{'selected': p.selection.old}">OLD GEAR</span>
-     </h1>
-        <ul>
-          <li ng-repeat="sg in p.gear | filter : {isCurrent: p.sort}">
-            <span>{{sg.gear.type}}</span>: {{sg.gear.brand.name}} "{{sg.gear.name}}" <a ng-click="p.showRev[sg.id] = !p.showRev[sg.id]" ng-hide="p.showRev[sg.id]">review</a>
+      </h1>
+      <ul>
+        <li ng-repeat="sg in p.gear | filter : {isCurrent: p.sort}">
+          <span>{{sg.gear.type}}</span>: {{sg.gear.brand.name}} "{{sg.gear.name}}" <a ng-click="p.showRev[sg.id] = !p.showRev[sg.id]" ng-hide="p.showRev[sg.id]">review</a>
 
-            <div class="review"  ng-init="p.showRev[sg.id]=false" ng-show="p.showRev[sg.id]">
+          <div class="review" ng-init="p.showRev[sg.id]=false" ng-show="p.showRev[sg.id]">
 
-              <hr>
-              <div ng-hide="p.showEditGear[sg.id]">
-                <p><img ng-src="{{sg.img}}">Rating: {{sg.gear.reviews[0].rating || "no rating"}}</p>
-                <p>{{sg.gear.reviews[0].text || "no review"}}</p>
-                <a href="" ng-init="p.showEditGear[sg.id] = false" ng-click="p.showEditGear[sg.id] = !p.showEditGear[sg.id]">edit</a>
-              </div>
+            <hr>
+            <div ng-hide="p.editGear[sg.id].show">
+              <p><img ng-src="{{sg.img}}">Rating: {{sg.gear.reviews[0].rating || "no rating"}}</p>
+              <p>{{sg.gear.reviews[0].text || "no review"}}</p>
+              <a href="" ng-if="p.mayEdit" ng-click="p.editGear[sg.id].show = !p.editGear[sg.id].show" ng-init="p.editGear[sg.id].show = false">edit</a>
 
-              <form ng-show="p.showEditGear[sg.id]" ng-submit="p.sgEditSubmit(sg.id)">
-                <div>
-                  <label for="">Rating:</label>
-                  <input type="text" name="rating" value="{{sg.gear.reviews[0].rating}}">
-                </div>
-                <div>
-                  <label for="">Photo URL:</label>
-                  <input type="text" name="img" value="{{sg.img}}">
-                </div>
-                <div>
-                  <div>
-                    <label for="">Review:</label>
-                  </div>
-                  <textarea name="review" rows="8" cols="40">{{sg.gear.reviews[0].text}}</textarea>
-                </div>
-                <div>
-                  <label for="">Current Setup?</label>
-                  Yes <input type="radio" ng-checked="{{sg.isCurrent}}" name="check"> |
-                  No <input type="radio"  ng-checked="{{!sg.isCurrent}}" name="check">
-                </div>
-                <div>
-                  <input type="submit" name="submit" value="submit">
-                  <input type="button" name="cancel" value="cancel"
-                    ng-click="p.showEditGear[sg.id] = !p.showEditGear[sg.id]">
-                </div>
-              </form>
-
-              <hr>
-
-              <a class="right" ng-click="p.showRev[sg.id] = !p.showRev[sg.id]">hide review</a>
             </div>
 
-          </li>
-        </ul>
-        <a href="" ng-click="p.showAddGear = true" ng-hide="p.showAddGear">Add Gear</a>
 
-        <form ng-show="p.showAddGear" ng-submit="p.sgNew()">
-          <div>
-            <label for="">Name:</label>
-            <input type="text" ng-model="p.addGear.name" value="">
+
+<!-- EDIT GEAR -->
+            <form ng-show="p.editGear[sg.id].show" ng-submit="p.sgEdit(this.sg.edit, sg.gear.id, sg.id)"
+            ng-init="this.sg.edit={};">
+              <div>
+                <label for="">Name: </label>
+                <input type="text"
+                  ng-model="this.sg.edit.name"
+                  ng-init="this.sg.edit.name = sg.gear.name">
+              </div>
+              <div>
+                <label for="">Brand: </label>
+                <select
+                  required
+                  ng-init="this.sg.edit.brand = {id: sg.gear.brand.id, name: sg.gear.brand.name }"
+                  ng-model="this.sg.edit.brand"
+                  ng-options="brand as brand.name for brand in p.brands track by brand.id">
+                </select>
+              </div>
+              <div>
+                <label for="">Type: </label>
+
+                <select name="type"
+                required
+                ng-model="this.sg.edit.type"
+                ng-options="type for (key,type) in p.categories">
+                  <option value=""></option>
+                </select>
+              </div>
+              <div>
+                <label for="">Rating:</label>
+                <input type="text" ng-model="this.sg.edit.rating" ng-init="this.sg.edit.rating = sg.gear.reviews[0].rating || null">
+              </div>
+              <div>
+                <label for="">Photo URL:</label>
+                <input type="text" ng-model="this.sg.edit.img"
+                ng-init="this.sg.edit.img = sg.img">
+              </div>
+              <div>
+                <div>
+                  <label for="">Review:</label>
+                </div>
+                <textarea name="review" rows="8" cols="40"
+                  ng-model="this.sg.edit.review"
+                    ng-init="this.sg.edit.review = sg.gear.reviews[0].text; this.sg.edit.reviewId = sg.gear.reviews[0].id"
+                  ></textarea>
+              </div>
+              <div>
+                <label for="">Current Setup?</label>
+                Yes
+                <input type="radio"
+                ng-checked="this.sg.edit.isCurrent"
+                ng-init="this.sg.edit.isCurrent = sg.isCurrent"
+                ng-click="this.sg.edit.isCurrent = true"
+                name="check"> | No
+                <input type="radio"
+                ng-checked="!this.sg.edit.isCurrent"
+                ng-click="this.sg.edit.isCurrent = false"
+                name="check">
+              </div>
+              <div>
+                <input type="submit" name="submit" value="submit">
+                <input type="button" name="cancel" value="cancel" ng-click="p.editGear[sg.id].show = !p.editGear[sg.id].show">
+              </div>
+            </form>
+
+            <hr>
+            <a class="right" ng-click="p.showRev[sg.id] = !p.showRev[sg.id]">hide review</a>
           </div>
-          <div>
-            <label for="">Brand:</label>
-            <select ng-model="p.addGear.brand" ngChange="{{p.checkNew()}}" class="" name="">
-              <option ng-repeat="brand in p.brands" value="{{brand.id}}" default>{{brand.name}}</option>
-              <option value="new">new</option>
-            </select>
-            <span ng-show="p.showNewBrand">
+        </li>
+      </ul>
+      <a href="" ng-if="p.mayEdit" ng-click="p.showAddGear = true" ng-hide="p.showAddGear">Add Gear</a>
+
+
+
+<!-- ADD GEAR -->
+      <form ng-show="p.showAddGear" ng-submit="p.sgNew()">
+        <div>
+          <label for="">Name:</label>
+          <input type="text" ng-model="p.addGear.name" value="">
+        </div>
+        <div>
+          <label for="">Brand:</label>
+          <select ng-model="p.addGear.brand" ngChange="{{p.checkNew()}}" class="" name="">
+            <option ng-repeat="brand in p.brands" value="{{brand.id}}" default>{{brand.name}}</option>
+            <option value="new">new</option>
+          </select>
+          <span ng-show="p.showNewBrand">
               <label for="">New Brand: </label>
               <input type="text" name="brand" ng-model="p.newBrand" value="">
             </span>
-          </div>
+        </div>
+        <div>
+          <label>Type:</label>
+          <select name="type" ng-model="p.addGear.type">
+            <option value="Boot">Boot</option>
+            <option value="Toestop">Toestop</option>
+            <option value="Wheels">Wheels</option>
+            <option value="Plates">Plates</option>
+            <option value="Helmet">Helmet</option>
+            <option value="Elbowpads">Elbowpads</option>
+            <option value="Wristgaurds">Wristgaurds</option>
+            <option value="Mouthgaurd">Mouthgaurd</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div>
+          <label for="">Photo URL:</label>
+          <input type="text" ng-model="p.addGear.img" value="">
+        </div>
+        <div>
+          <label for="" ng-init="p.addGear.isCurrent=true">Current Setup?</label>
+          Yes
+          <input type="radio" checked name="setup" ng-click="p.addGear.isCurrent = true"> No
+          <input type="radio" name="setup" ng-click="p.addGear.isCurrent = false">
+        </div>
+        <div>
+          <label for="">Rating: </label>
+          <input type="text" ng-model="p.addGear.rating">
+        </div>
+        <div>
+          <label for="">Review: </label>
           <div>
-            <label>Type:</label>
-            <select name="type" ng-model="p.addGear.type">
-              <option value="Boot">Boot</option>
-              <option value="Toestop">Toestop</option>
-              <option value="Wheels">Wheels</option>
-              <option value="Plates">Plates</option>
-              <option value="Helmet">Helmet</option>
-              <option value="Elbowpads">Elbowpads</option>
-              <option value="Wristgaurds">Wristgaurds</option>
-              <option value="Mouthgaurd">Mouthgaurd</option>
-              <option value="Other">Other</option>
-            </select>
+            <textarea name="name" rows="8" cols="40" ng-model="p.addGear.review"></textarea>
           </div>
-          <div>
-            <label for="">Photo URL:</label>
-            <input type="text" ng-model="p.addGear.img" value="">
-          </div>
-          <div>
-            <label for="" ng-init="p.addGear.isCurrent=true">Current Setup?</label>
-            Yes <input type="radio"
-                checked name="setup"
-                ng-click="p.addGear.isCurrent = true">
-            No <input type="radio"
-                name="setup"
-                ng-click="p.addGear.isCurrent = false">
-          </div>
-          <div>
-            <label for="">Rating: </label>
-            <input type="text" ng-model="p.addGear.rating">
-          </div>
-          <div>
-            <label for="">Review: </label>
-            <div>
-              <textarea name="name" rows="8" cols="40" ng-model="p.addGear.review"></textarea>
-            </div>
-          </div>
-          <div>
-            <input type="submit" name="submit" value="submit">
-            <input type="button" name="cancel" value="cancel" ng-click="p.showAddGear = false">
-          </div>
-        </form>
+        </div>
+        <div>
+          <input type="submit" name="submit" value="submit">
+          <input type="button" name="cancel" value="cancel" ng-click="p.showAddGear = false">
+        </div>
+      </form>
     </section>
 
+
+
+<!-- BIO -->
     <section class="window">
       <!-- <h1>BIO <span>GALLERY</span></h1> -->
       <h1>BIO</h1>
       <div class="box">
         <div ng-hide="p.showEditBio">
           <p>{{p.profile.summary}}</p>
-          <a href="" ng-click="p.showEditBio = true">edit</a>
+          <a href="" ng-if="p.mayEdit" ng-click="p.showEditBio = true">edit</a>
         </div>
         <div ng-show="p.showEditBio">
           <form ng-submit="p.bioSubmit()">

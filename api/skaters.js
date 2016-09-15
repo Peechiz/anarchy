@@ -36,13 +36,13 @@ module.exports = [{
         attributes: ['isCurrent','id','img'],
         include: [{
           model: m.Gears,
-          attributes: ['name', 'type'],
+          attributes: ['name', 'type', 'id'],
           include: [{
             model: m.Brands,
-            attributes: ['name']
+            attributes: ['name','id']
           },{
             model: m.Reviews,
-            attributes: ['rating', 'text']
+            attributes: ['rating', 'text', 'id']
           }]
         }]
       }).then(gear=>{
@@ -176,6 +176,61 @@ module.exports = [{
         });
 
       }
+    }
+  }
+},{
+  method: 'PUT',
+  path: '/api/skaters/{id}/gear/{gearId}',
+  config: {
+    handler: (req,res) => {
+      const m = req.server.app.models;
+      const db = m.db;
+
+      db.transaction( t => {
+        return m.Gears.upsert({
+          id: req.params.gearId,
+          name: req.payload.name,
+          type: req.payload.type,
+          brandId: req.payload.brand
+        },{transaction: t})
+        .then(gear => {
+          return m.SkatersGears.upsert({
+            id: req.payload.sgId,
+            gearId: gear.id,
+            skaterId: req.params.id,
+            img: req.payload.img,
+            isCurrent: req.payload.isCurrent
+          },{transaction: t})
+        }).then(sg => {
+          return m.Reviews.upsert({
+            id: req.payload.reviewId,
+            gearId: req.params.gearId,
+            skaterId: req.params.id,
+            text: req.payload.review,
+            rating: req.payload.rating
+          },{transaction: t})
+        })
+      }).then(result => {
+        res('you did it hurray')
+      }).catch(err => {
+        console.log(err);
+        res(err)
+      })
+    }
+  }
+},{
+  method: 'DELETE',
+  path: '/api/skaters/{id}',
+  config: {
+    auth: 'admin',
+    handler: (req,res) => {
+      const m = req.server.app.models;
+
+      m.Skaters.destroy({
+        where: {id: req.params.id}
+      }).then(numKilled => {
+        res('deleted ' + numKilled )
+      })
     }
   }
 },{
