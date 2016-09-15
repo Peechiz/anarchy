@@ -11,9 +11,12 @@
   <div ng-show="t.selected === team.teamName">
     <h1>{{team.teamName}}</h1>
     <hr>
-    <div class="skaters" ng-repeat="skater in team.skaters">
+    <div class="skaters"
+          ng-repeat="skater in team.skaters"
+          ng-class="{'stripe': $odd}"
+          ng-click="t.view(skater.id)">
       <img ng-src={{skater.photo}} alt="">
-      <p>{{skater.derbyName}}: #{{skater.number}}</p>
+      <p>#{{skater.number}} {{skater.derbyName}}</p>
     </div>
   </div>
 

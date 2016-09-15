@@ -96,8 +96,23 @@ main {
   align-items: center; }
   .teams h1, .teams h3 {
     text-transform: uppercase; }
-  .teams .skaters img {
-    height: 75px; }
+  .teams .skaters {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start; }
+    .teams .skaters:hover {
+      background-color: #BA141A; }
+    .teams .skaters img {
+      height: 75px;
+      margin: 5px; }
+    .teams .skaters p {
+      font-family: 'rockSalt';
+      font-size: 2em;
+      margin: 4px 10px 4px 10px; }
+  .teams .stripe {
+    background-color: #141414; }
 
 .join p {
   font-size: 1.3em;
@@ -178,15 +193,21 @@ main {
   .profile section {
     max-width: 33%;
     min-width: 260px; }
-  .profile h1 span {
-    color: #4A4A4A; }
-  .profile h1 .selected {
-    color: white; }
   .profile .info ul {
     list-style-type: none; }
     .profile .info ul span {
       font-family: 'rockSalt', helvetica, sans-serif;
       margin-left: 5px; }
+  .profile .gear h1 span {
+    cursor: pointer;
+    color: #4A4A4A; }
+    .profile .gear h1 span:hover {
+      color: #BA5C60; }
+  .profile .gear h1 .selected {
+    color: white;
+    cursor: default; }
+    .profile .gear h1 .selected:hover {
+      color: currentColor; }
   .profile .gear ul li {
     clear: both;
     margin-bottom: 10px; }
