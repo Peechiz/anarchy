@@ -12,8 +12,10 @@ module.exports = [
             model: m.Skaters,
             attributes: [
               'derbyName',
+              'id',
               'number',
-              'photo'            ]
+              'photo'
+            ]
           }]
         }).then(teams=>{
           res(teams.map(x=>x.toJSON()));
