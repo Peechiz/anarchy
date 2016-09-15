@@ -8,6 +8,25 @@
   src: url('../font/RockSalt.ttf');
 }
 
+@mixin h1Tabs {
+  h1 {
+    span {
+      cursor: pointer;
+      color: $greyed;
+      &:hover {
+        color: $blood_select;
+      }
+    }
+    .selected {
+      color: white;
+      cursor: default;
+      &:hover {
+        color: currentColor;
+      }
+    }
+  }
+}
+
 $greyed: #4A4A4A;
 $blood: #BA141A;
 $blood_select: #BA5C60;
@@ -115,6 +134,19 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  @include h1Tabs;
+  .ctrls {
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid $greyed;
+    border-bottom: 1px solid $greyed;
+    margin-bottom: 16px;
+    p {
+      margin: 8px 0;
+    }
+  }
   table {
     width: 80%;
     img {
@@ -256,24 +288,6 @@ main {
 //   background-image: url('http://fillmurray.com/g/900/600');
 //   background-size: contain;
 // }
-@mixin h1Tabs {
-  h1 {
-    span {
-      cursor: pointer;
-      color: $greyed;
-      &:hover {
-        color: $blood_select;
-      }
-    }
-    .selected {
-      color: white;
-      cursor: default;
-      &:hover {
-        color: currentColor;
-      }
-    }
-  }
-}
 
 .profile {
   display: flex;

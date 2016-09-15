@@ -81,7 +81,27 @@ main {
 .admin {
   display: flex;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  flex-direction: column; }
+  .admin h1 span {
+    cursor: pointer;
+    color: #4A4A4A; }
+    .admin h1 span:hover {
+      color: #BA5C60; }
+  .admin h1 .selected {
+    color: white;
+    cursor: default; }
+    .admin h1 .selected:hover {
+      color: currentColor; }
+  .admin .ctrls {
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid #4A4A4A;
+    border-bottom: 1px solid #4A4A4A;
+    margin-bottom: 16px; }
+    .admin .ctrls p {
+      margin: 8px 0; }
   .admin table {
     width: 80%; }
     .admin table img {
