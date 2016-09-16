@@ -10,10 +10,7 @@
       </select>
       <div ng-init="a.reverse=false;" ng-click="a.reverse = !a.reverse" ng-class="{'caret_down': !a.reverse, 'caret_up': a.reverse}"></div>
     </div>
-    <!-- <p> -->
-      <!-- <a href="" ng-click="a.type = !a.type" ng-init="a.type = false" ng-hide="a.type">Hide Pending</a>
-      <a href="" ng-click="a.type = !a.type" ng-init="a.type = false" ng-show="a.type">Show Pending</a> -->
-    <!-- </p> -->
+
     <p>
       <a href=""
       ng-init="a.type = 'all'"
@@ -26,10 +23,6 @@
       <a href="" ng-click="a.type = 'all'">All</a>
     </p>
 
-    <!-- <span ng-click="p.select('gear'); p.sort = true;"
-    ng-class="{'selected': p.selection.gear}">GEAR</span>
-     <span ng-click="p.select('old'); p.sort = false;"
-     ng-class="{'selected': p.selection.old}">OLD GEAR</span> -->
   </div>
   <table ng-show="a.show.table">
     <thead>
