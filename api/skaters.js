@@ -1,4 +1,19 @@
 const Boom = require('boom');
+const bcrypt = require('bcrypt');
+
+var rand = () => {
+  var num = Math.floor(Math.random() * 1000)
+  num = num.toString();
+  if (num.length < 4){
+    var diff = 4 - num.length;
+    num = num.split('')
+    for (var i = 0; i < diff; i++){
+      num.unshift('0')
+    }
+    return num.join('')
+  }
+  return num;
+}
 
 module.exports = [{
   method: 'GET',
@@ -22,6 +37,21 @@ module.exports = [{
           return record.dataValues
         })
         res(data);
+      })
+    }
+  }
+},{
+  method: 'POST',
+  path: '/api/skaters',
+  config: {
+    handler: (req,res) => {
+      const m = req.server.app.models;
+      m.Skaters.create({
+        userName: req.payload.userName,
+        derbyName: `maggot${rand()}`,
+        password: bcrypt.hashSync(req.payload.password, 8)
+      }).then(result => {
+        res(result)
       })
     }
   }
@@ -94,7 +124,8 @@ module.exports = [{
       m.Skaters.upsert({
         id: req.params.id,
         teamId: req.payload.team,
-        rankId: req.payload.rank
+        rankId: req.payload.rank,
+        admin: req.payload.admin
       }).then(result=>{
         res(result)
       })
