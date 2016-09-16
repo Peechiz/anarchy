@@ -39,6 +39,9 @@ angular.module('routes',['ngRoute'])
       },
       mayEdit: (edit) => {
         return edit.mayEdit();
+      },
+      load: (setHeader) => {
+        return setHeader.set()
       }
 
     }

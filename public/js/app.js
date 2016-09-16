@@ -48,8 +48,8 @@ app.factory('api', ['$http', ($http) => {
 }])
 
 app.factory('setHeader', ['$http', '$localStorage', ($http, $localStorage)=>{
-  var set = {}
-  set = () => {
+  var obj = {}
+  obj.set = () => {
     try {
       $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
       return true;
@@ -57,7 +57,7 @@ app.factory('setHeader', ['$http', '$localStorage', ($http, $localStorage)=>{
       return false
     }
   }
-  return set
+  return obj
 }])
 
 app.factory('profile', ['$localStorage', 'api', ($localStorage, api) => {
