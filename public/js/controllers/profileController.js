@@ -1,8 +1,8 @@
 'use strict'
 
-app.controller('profileController', ['profile', 'gear', 'brands','api', 'mayEdit', '$route', '$localStorage', '$window', profileController])
+app.controller('profileController', ['profile', 'gear', 'brands','api', 'mayEdit', 'load', '$route', '$localStorage', '$window', profileController])
 
-function profileController(profile, gear, brands, api, mayEdit, $route, $localStorage, $window){
+function profileController(profile, gear, brands, api, mayEdit, load, $route, $localStorage, $window){
   const p = this;
   console.log('profile controller up');
 
