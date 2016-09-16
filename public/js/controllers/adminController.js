@@ -1,5 +1,18 @@
 'use strict'
 
+app.filter('pending', ()=>{
+  return (input, bool)=>{
+    if (!bool) return input;
+    var out = [];
+    angular.forEach(input, (skater) => {
+      if (skater.rankId != 1){
+        out.push(skater);
+      }
+    })
+    return out;
+  }
+})
+
 app.controller('adminController', ['$scope', 'api', 'isAdmin', 'ranks', 'teams', '$window', adminController])
 
 function adminController($scope, api, isAdmin, ranks, teams, $window){
@@ -16,8 +29,28 @@ function adminController($scope, api, isAdmin, ranks, teams, $window){
 
   a.data = {};
   a.data.skaters = {};
-  // console.log(a.ranks);
+  a.new = {};
+  a.sort = {
+    options: [
+      {name: 'number', value: 'a.sort.number'},
+      {name: 'name', value: 'a.sort.name'},
+      {name: 'rank', value: 'a.sort.rank'},
+    ],
+  };
+  a.show = {
+    table: true
+  };
 
+  a.select = function(key){
+    if (key === 'add') {
+      a.show.addSkater = true;
+      a.show.table = false;
+    }
+    else {
+      a.show.addSkater = false;
+      a.show.table = true;
+    }
+  }
 
   if (a.isAdmin){
     api.getSkaters().then(res=>{
@@ -27,7 +60,9 @@ function adminController($scope, api, isAdmin, ranks, teams, $window){
         a.data.skaters[skater.id] = {};
 
         a.data.skaters[skater.id].rank = {id: skater.rankId, name: skater.rank.name}
-        a.data.skaters[skater.id].team = {id: skater.teamId, name: skater.team.teamName}
+        if (skater.team){
+          a.data.skaters[skater.id].team = {id: skater.teamId, name: skater.team.teamName}
+        }
       })
     })
 
@@ -37,9 +72,41 @@ function adminController($scope, api, isAdmin, ranks, teams, $window){
     })
   }
 
-  a.editSkater = (id) => {
+  a.deletePrompt = skater => {
+    a.show.warning = true;
+    a.show.table = false;
+    a.kill = skater;
+  }
+  a.whoops = () => {
+    a.show.warning = false;
+    a.show.table = true;
+    a.kill = '';
+  }
+  a.delete = skater => {
+    api.deleteSkater(skater.id).then(result => {
+      $window.location.reload();
+    })
+  }
+
+  a.newSkater = () => {
+    if (a.new.password !== a.new.passwordConfirm){
+      a.passMissMatch = true;
+      return;
+    }
+    var data  = {
+      userName: a.new.userName,
+      password: a.new.password
+    }
+    api.newSkater(data).then(res => {
+      console.log('you did it hurray', res);
+      $window.location.reload();
+    })
+  }
+
+  a.editSkater = id => {
     console.log('skaters:',a.skaters);
     var data = {
+      admin: a.data.skaters[id].admin,
       rank: a.data.skaters[id].rank.id,
       team: a.data.skaters[id].team.id
     }
