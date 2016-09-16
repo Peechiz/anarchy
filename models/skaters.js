@@ -3,7 +3,8 @@
       var Skaters = sequelize.define('skaters', {
         id: {
           type: DataTypes.INTEGER,
-          primaryKey: true
+          primaryKey: true,
+          autoIncrement: true
         },
         userName: DataTypes.STRING,
         derbyName: DataTypes.STRING,
@@ -28,21 +29,8 @@
         summary: DataTypes.TEXT,
         password: DataTypes.STRING
       }, {
+        // paranoid: true,
         timestamps: true,
-        // getterMethods: {
-        //   getSkater: function(){
-        //     return {
-        //       userName: this.userName,
-        //       derbyName: this.derbyName,
-        //       number: this.number,
-        //       team: this.team,
-        //       favPosition: this.favPosition,
-        //       photo: this.photo,
-        //       rank: this.rank,
-        //       summary: this.summary,
-        //     }
-        //   }
-        // }
       });
       return Skaters;
     };
