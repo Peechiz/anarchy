@@ -1,10 +1,35 @@
 <div class="admin" ng-if="a.isAdmin">
-  <h1><span>SKATERS</span> <span>ADD</span></h1>
-  <div class="ctrls">
-    <p><a href="">Sort By:</a></p>
-    <p><a href="">Hide Pending</a></p>
+  <h1><span ng-click="a.select('skaters'); a.show.table = true;" ng-class="{'selected': a.show.table}" >SKATERS</span> <span ng-click="a.select('add'); a.show.addSkater = true;" ng-class="{'selected': a.show.addSkater}">ADD</span></h1>
+
+  <div ng-show="a.show.table" class="ctrls">
+    <div class="sort">
+      <a href="">Sort By:</a>
+      <select ng-model="a.sort">
+        <option value="name">Name</option>
+        <option value="rankId">Rank</option>
+      </select>
+      <div ng-init="a.reverse=false;" ng-click="a.reverse = !a.reverse" ng-class="{'caret_down': !a.reverse, 'caret_up': a.reverse}"></div>
+    </div>
+    <!-- <p> -->
+      <!-- <a href="" ng-click="a.pending = !a.pending" ng-init="a.pending = false" ng-hide="a.pending">Hide Pending</a>
+      <a href="" ng-click="a.pending = !a.pending" ng-init="a.pending = false" ng-show="a.pending">Show Pending</a> -->
+    <!-- </p> -->
+    <p>
+      <a href="">Pending</a>
+    </p>
+    <p>
+      <a href="">Current</a>
+    </p>
+    <p>
+      <a href="">All</a>
+    </p>
+
+    <!-- <span ng-click="p.select('gear'); p.sort = true;"
+    ng-class="{'selected': p.selection.gear}">GEAR</span>
+     <span ng-click="p.select('old'); p.sort = false;"
+     ng-class="{'selected': p.selection.old}">OLD GEAR</span> -->
   </div>
-  <table>
+  <table ng-show="a.show.table">
     <thead>
       <tr>
         <th>Photo</th>
@@ -13,19 +38,22 @@
         <th>#</th>
         <th>Team</th>
         <th>Rank</th>
+        <th>Admin</th>
         <th colspan="2">Edit</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="skater in a.skaters">
+      <tr ng-repeat="skater in a.skaters | orderBy : a.sort : a.reverse | pending : a.pending"
+      ng-class="{'stripe': $even}">
         <td ng-init="a.edit[skater.id]=true" ng-show="a.edit[skater.id]"><img ng-src={{skater.photo}} alt=""></td>
         <td ng-show="a.edit[skater.id]">{{skater.userName}}</td>
-        <td ng-show="a.edit[skater.id]">{{skater.derbyName}}</td>
+        <td ng-show="a.edit[skater.id]"><a href="/#/skaters/{{skater.id}}">{{skater.derbyName}}</a></td>
         <td ng-show="a.edit[skater.id]">{{skater.number}}</td>
         <td ng-show="a.edit[skater.id]">{{skater.team.teamName}}</td>
         <td ng-show="a.edit[skater.id]">{{skater.rank.name}}</td>
+        <td ng-show="a.edit[skater.id]">{{skater.admin}}</td>
         <td ng-show="a.edit[skater.id]"><a href="" ng-click="a.edit[skater.id]=false">edit</a></td>
-        <td ng-show="a.edit[skater.id]"><a href="">delete</a></td>
+        <td ng-show="a.edit[skater.id]"><a href="" ng-click="a.deletePrompt(skater)">delete</a></td>
 
 <!-- EDIT -->
         <form
@@ -52,6 +80,11 @@
             ng-options="rank as rank.name for rank in a.ranks track by rank.id">
             </select>
           </td>
+          <td ng-hide="a.edit[skater.id]">
+            <input type="checkbox"
+            ng-model="a.data.skaters[skater.id].admin"
+            ng-init="a.data.skaters[skater.id].admin = skater.admin">
+          </td>
           <td ng-hide="a.edit[skater.id]"
             ng-click="a.editSkater(skater.id)"><a href="">submit</a>
           </td>
@@ -63,6 +96,38 @@
       </tr>
     </tbody>
   </table>
+
+<!-- ADD SKATER -->
+  <div class="newSkater" ng-show="a.show.addSkater">
+    <form ng-submit="a.newSkater()">
+      <div>
+        <label for="">User Name: </label>
+        <input type="text" ng-model="a.new.userName">
+      </div>
+      <div>
+        <label for="">Password: </label>
+        <input type="password"
+          ng-model="a.new.password">
+      </div>
+      <div>
+        <label for="">Confirm Password: </label>
+        <input type="password"
+          ng-model="a.new.passwordConfirm">
+      </div>
+      <div>
+        <input type="submit">
+      </div>
+    </form>
+    <p ng-show="a.passMissMatch" class="passWarning">Passwords do not match!</p>
+  </div>
+
+  <div class="warning" ng-show="a.show.warning">
+    <p>Really delete {{a.kill.derbyName}}?</p>
+    <div class="buttons">
+      <button type="button" ng-click="a.whoops()">Whoops</button>
+      <button ng-click="a.delete(a.kill)" type="button">Bye, Felicia</button>
+    </div>
+  </div>
 </div>
 
 <div ng-if="!a.isAdmin" style="width: 100%; display: flex; justify-content: center;">
