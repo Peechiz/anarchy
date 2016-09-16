@@ -11,17 +11,19 @@
       <div ng-init="a.reverse=false;" ng-click="a.reverse = !a.reverse" ng-class="{'caret_down': !a.reverse, 'caret_up': a.reverse}"></div>
     </div>
     <!-- <p> -->
-      <!-- <a href="" ng-click="a.pending = !a.pending" ng-init="a.pending = false" ng-hide="a.pending">Hide Pending</a>
-      <a href="" ng-click="a.pending = !a.pending" ng-init="a.pending = false" ng-show="a.pending">Show Pending</a> -->
+      <!-- <a href="" ng-click="a.type = !a.type" ng-init="a.type = false" ng-hide="a.type">Hide Pending</a>
+      <a href="" ng-click="a.type = !a.type" ng-init="a.type = false" ng-show="a.type">Show Pending</a> -->
     <!-- </p> -->
     <p>
-      <a href="">Pending</a>
+      <a href=""
+      ng-init="a.type = 'all'"
+      ng-click="a.type = 'pending'">Pending</a>
     </p>
     <p>
-      <a href="">Current</a>
+      <a href="" ng-click="a.type = 'current'">Current</a>
     </p>
     <p>
-      <a href="">All</a>
+      <a href="" ng-click="a.type = 'all'">All</a>
     </p>
 
     <!-- <span ng-click="p.select('gear'); p.sort = true;"
@@ -43,7 +45,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="skater in a.skaters | orderBy : a.sort : a.reverse | pending : a.pending"
+      <tr ng-repeat="skater in a.skaters | orderBy : a.sort : a.reverse | type : a.type"
       ng-class="{'stripe': $even}">
         <td ng-init="a.edit[skater.id]=true" ng-show="a.edit[skater.id]"><img ng-src={{skater.photo}} alt=""></td>
         <td ng-show="a.edit[skater.id]">{{skater.userName}}</td>

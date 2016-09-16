@@ -1,12 +1,14 @@
 'use strict'
 
-app.filter('pending', ()=>{
-  return (input, bool)=>{
-    if (!bool) return input;
+app.filter('type', ()=>{
+  return (input, type)=>{
+    if (type === 'all') return input;
     var out = [];
     angular.forEach(input, (skater) => {
-      if (skater.rankId != 1){
+      if (type === 'pending' && skater.rankId == 1){
         out.push(skater);
+      } else if (type === 'current' && skater.rankId != 1){
+        out.push(skater)
       }
     })
     return out;
