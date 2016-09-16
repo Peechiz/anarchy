@@ -20,13 +20,23 @@ module.exports = {
           type: Sequelize.STRING,
           unique: true
         },
-        password: Sequelize.STRING,
-        derbyName: Sequelize.STRING,
+        password: {
+          type: Sequelize.STRING,
+        },
+        derbyName: {
+          type: Sequelize.STRING,
+        },
         number: Sequelize.STRING,
         team: Sequelize.STRING,
         favPosition: Sequelize.STRING,
-        photo: Sequelize.STRING,
-        admin: Sequelize.BOOLEAN,
+        photo: {
+          type: Sequelize.STRING,
+          defaultValue: '/img/logo.png'
+        },
+        admin: {
+          type: Sequelize.BOOLEAN,
+          defaultValue: false
+        },
         rank: Sequelize.STRING,
         summary: Sequelize.TEXT
       }

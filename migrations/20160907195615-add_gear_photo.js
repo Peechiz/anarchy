@@ -7,7 +7,7 @@ module.exports = {
       'img',
       {
         type: Sequelize.STRING,
-        defaultValue: null,
+        defaultValue: '/img/logo.png',
         allowNull: true
       }
     )

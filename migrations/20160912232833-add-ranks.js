@@ -10,7 +10,8 @@ module.exports = {
         references: {
           model: 'ranks',
           key: 'id'
-        }
+        },
+        defaultValue: 1,
       }
     ).then(()=>{
       return queryInterface.removeColumn('skaters', 'rank')
