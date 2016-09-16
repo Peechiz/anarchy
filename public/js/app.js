@@ -37,8 +37,27 @@ app.factory('api', ['$http', ($http) => {
   api.updateSkater = (id,data) => {
     return $http.put(`/api/skaters/${id}`, data)
   }
+  api.newSkater = data => {
+    return $http.post('/api/skaters', data)
+  }
+  api.deleteSkater = id => {
+    return $http.delete(`/api/skaters/${id}`)
+  }
 
   return api;
+}])
+
+app.factory('setHeader', ['$http', '$localStorage', ($http, $localStorage)=>{
+  var set = {}
+  set = () => {
+    try {
+      $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.currentUser.token;
+      return true;
+    } catch (err){
+      return false
+    }
+  }
+  return set
 }])
 
 app.factory('profile', ['$localStorage', 'api', ($localStorage, api) => {
