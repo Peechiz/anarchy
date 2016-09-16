@@ -27,6 +27,8 @@
   }
 }
 
+
+
 $greyed: #4A4A4A;
 $blood: #BA141A;
 $blood_select: #BA5C60;
@@ -45,6 +47,9 @@ body {
     &:hover {
       color: white;
     }
+  }
+  .stripe {
+    background-color: $main_grey;
   }
   .jumbo {
     font-size: 4em;
@@ -130,16 +135,68 @@ main {
   padding: 10px 30px;
 }
 
+@mixin caret {
+  width: 0px;
+  height: 0px;
+  display: block;
+  position: absolute;
+  top: 5px;
+  right: -25px;
+  z-index: 9999;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+}
+
 .admin {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   @include h1Tabs;
+  .newSkater {
+    div {
+      margin: 15px 0;
+    }
+    .passWarning {
+      color: $blood;
+      text-align: center;
+    }
+  }
+  .sort {
+    position: relative;
+    display: block;
+    .caret_up {
+      @include caret;
+      border-bottom: 12px solid $blood;
+      &:hover{
+        border-bottom-color: $blood_select;
+      }
+    }
+    .caret_down {
+      @include caret;
+      border-top: 12px solid $blood;
+      &:hover{
+        border-top-color: $blood_select;
+      }
+    }
+  }
+  .warning{
+    width: 30%;
+    p {
+      font-size: 1.5em;
+      text-align: center;
+    }
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-around;
+    }
+  }
   .ctrls {
     width: 80%;
     display: flex;
     justify-content: space-around;
+    align-items: center;
     border-top: 1px solid $greyed;
     border-bottom: 1px solid $greyed;
     margin-bottom: 16px;
@@ -148,9 +205,18 @@ main {
     }
   }
   table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    tbody > tr:hover {
+      border-top: 1px solid $blood;
+      border-bottom: 1px solid $blood;
+    }
     width: 80%;
     img {
       height: 75px;
+    }
+    thead > tr {
+      margin-bottom: 10px;
     }
     th {
       text-align: left;
@@ -184,9 +250,6 @@ main {
       font-size: 2em;
       margin: 4px 10px 4px 10px;
     }
-  }
-  .stripe {
-    background-color: $main_grey;
   }
 }
 
@@ -281,13 +344,6 @@ main {
     height: 100%;
   }
 }
-
-// .test {
-//   width: 90px;
-//   height: 60px;
-//   background-image: url('http://fillmurray.com/g/900/600');
-//   background-size: contain;
-// }
 
 .profile {
   display: flex;

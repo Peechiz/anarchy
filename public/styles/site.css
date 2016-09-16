@@ -15,6 +15,8 @@ body {
     color: white; }
     body .noClick:hover {
       color: white; }
+  body .stripe {
+    background-color: #141414; }
   body .jumbo {
     font-size: 4em; }
   body a {
@@ -93,19 +95,70 @@ main {
     cursor: default; }
     .admin h1 .selected:hover {
       color: currentColor; }
+  .admin .newSkater div {
+    margin: 15px 0; }
+  .admin .newSkater .passWarning {
+    color: #BA141A;
+    text-align: center; }
+  .admin .sort {
+    position: relative;
+    display: block; }
+    .admin .sort .caret_up {
+      width: 0px;
+      height: 0px;
+      display: block;
+      position: absolute;
+      top: 5px;
+      right: -25px;
+      z-index: 9999;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-bottom: 12px solid #BA141A; }
+      .admin .sort .caret_up:hover {
+        border-bottom-color: #BA5C60; }
+    .admin .sort .caret_down {
+      width: 0px;
+      height: 0px;
+      display: block;
+      position: absolute;
+      top: 5px;
+      right: -25px;
+      z-index: 9999;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 12px solid #BA141A; }
+      .admin .sort .caret_down:hover {
+        border-top-color: #BA5C60; }
+  .admin .warning {
+    width: 30%; }
+    .admin .warning p {
+      font-size: 1.5em;
+      text-align: center; }
+    .admin .warning .buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-around; }
   .admin .ctrls {
     width: 80%;
     display: flex;
     justify-content: space-around;
+    align-items: center;
     border-top: 1px solid #4A4A4A;
     border-bottom: 1px solid #4A4A4A;
     margin-bottom: 16px; }
     .admin .ctrls p {
       margin: 8px 0; }
   .admin table {
+    border-collapse: collapse;
+    border-spacing: 0;
     width: 80%; }
+    .admin table tbody > tr:hover {
+      border-top: 1px solid #BA141A;
+      border-bottom: 1px solid #BA141A; }
     .admin table img {
       height: 75px; }
+    .admin table thead > tr {
+      margin-bottom: 10px; }
     .admin table th {
       text-align: left;
       font-size: 1.3em; }
@@ -131,8 +184,6 @@ main {
       font-family: 'rockSalt';
       font-size: 2em;
       margin: 4px 10px 4px 10px; }
-  .teams .stripe {
-    background-color: #141414; }
 
 .join p {
   font-size: 1.3em;
