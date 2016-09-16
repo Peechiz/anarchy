@@ -12,9 +12,24 @@ function navController($scope, $location, $window, auth, $localStorage){
     profile: false,
     teams: false,
     join: false,
-    who: false,
+    whoarewe: false,
     admin: false,
   }
+
+  n.clear = ()=>{
+    for (var prop in n.nav){
+      n.nav[prop] = false;
+    }
+  }
+  
+  n.setClicked = function(key){
+    if (!key) return;
+    n.clear();
+    n.nav[key] = true;
+  }
+
+  n.setClicked($location.path().slice(1))
+
 
   n.isAdmin = (function(){
     if (n.hasLogin){
@@ -24,16 +39,6 @@ function navController($scope, $location, $window, auth, $localStorage){
   })()
 
   // sets the currently clicked link's color to white
-  n.setClicked = function(key){
-    n.clear();
-    n.nav[key] = true;
-  }
-
-  n.clear = ()=>{
-    for (var prop in n.nav){
-      n.nav[prop] = false;
-    }
-  }
 
   n.reload = ()=> {
     n.clear();
