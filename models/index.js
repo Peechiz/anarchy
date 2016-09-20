@@ -11,7 +11,8 @@ var models =  {
   Gears: db.import(__dirname + '/' + 'gears'),
   Brands: db.import(__dirname + '/' + 'brands'),
   Teams: db.import(__dirname + '/' + 'teams'),
-  Ranks: db.import(__dirname + '/' + 'ranks')
+  Ranks: db.import(__dirname + '/' + 'ranks'),
+  Applications: db.import(__dirname + '/' + 'applications'),
 };
 
 // create relationships between models.
@@ -37,6 +38,9 @@ console.log('creating relationships...');
 
   m.Reviews.belongsTo(m.Gears)
   m.Gears.hasMany(m.Reviews)
+
+  m.Skaters.hasOne(m.Applications)
+  m.Applications.belongsTo(m.Skaters)
 })(models);
 
 module.exports = models;
