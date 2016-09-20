@@ -43,6 +43,9 @@ app.factory('api', ['$http', ($http) => {
   api.deleteSkater = id => {
     return $http.delete(`/api/skaters/${id}`)
   }
+  api.submitApplication = data => {
+    return $http.post('/api/applications', data)
+  }
 
   return api;
 }])
