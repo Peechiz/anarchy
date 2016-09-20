@@ -10,9 +10,9 @@ I'm currently consulting with them to improve the site, currently hosted on Hero
 
 ## Planned Features
 
-- [x] Skater Profiles
+- [x] **Skater Profiles**
 - [ ] Admin Panel
-  - [x] Full skaters CRUD
+  - [x] **Full skaters CRUD**
   - [ ] View pending skater applications
   - [ ] Front Page editing
 - [ ] New Skater Application
