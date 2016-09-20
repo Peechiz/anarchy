@@ -9,47 +9,48 @@
 
     <form ng-submit="j.submit()" ng-show="questions">
       <label for="">Briefly describe your derby/skating experience ( none is ok! )</label>
-      <textarea name="xp" rows="8" cols="80"></textarea>
+      <textarea name="xp" rows="8" cols="80" ng-model="j.xp"></textarea>
 
       <div class="fields">
         <fieldset>
           <label for="">User Name: </label>
-          <input type="text" name="name" value="">
+          <input type="text" ng-model="j.userName" value="">
         </fieldset>
         <fieldset>
           <label for="">Password: </label>
-          <input type="password">
+          <input type="password" ng-model="j.password">
         </fieldset>
         <fieldset>
           <label for="">Confirm Password: </label>
-          <input type="password">
+          <input type="password" ng-model="j.passwordConfirm">
         </fieldset>
         <fieldset>
           <label for="">Phone Number: </label>
-          <input type="tel" name="name" value="">
+          <input type="tel" ng-model="j.tel" value="">
         </fieldset>
         <fieldset>
           <label for="">Email: </label>
-          <input type="email" name="name" value="">
+          <input type="email" ng-model="j.email" value="">
         </fieldset>
       </div>
 
       <p>Do you own a pair of quad rollerskates?</p>
-      <div class="radio">
+      <div class="radio" ng-init="j.hasSkates = null">
         <label for="">Yes</label>
-        <input type="radio" name="hasSkates" value="true">
+        <input type="radio" name="hasSkates" ng-click="j.hasSkates=true" value="true">
         <label for="">No</label>
-        <input type="radio" name="hasSkates" value="false">
+        <input type="radio" name="hasSkates" ng-click="j.hasSkates=false" value="false">
       </div>
 
-      <p>Do you have pads (elbow, knee, wrist, helmet, mouthgaurd)?</p>
-      <div class="radio">
+      <p>Do you have pads (elbow, knee, wrist, helmet, and mouthgaurd)?</p>
+      <div class="radio" ng-init="j.hasPads = null;">
         <label for="">Yes</label>
-        <input type="radio" name="hasPads" value="true">
+        <input type="radio" name="hasPads" ng-click="j.hasPads = true" value="true">
         <label for="">No</label>
-        <input type="radio" name="hasPads" value="false">
+        <input type="radio" name="hasPads" ng-click="j.hasPads = false" value="false">
       </div>
       <input type="submit">
+      <p class="passWarning" ng-show="j.passMatch">Passwords do not match</p>
     </form>
 
   </div>
