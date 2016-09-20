@@ -22,6 +22,8 @@ module.exports = {
         photo: 'http://www.fillmurray.com/300/300',
         admin: false,
         rankId: 3,
+        tel: '555-5555',
+        email: 'user@test.com',
         summary: 'I do it for the dank memes',
         password: '$2a$08$hf6MYh81bz9qoIOONHTkWu9308Lup.O..HXejK2Z9hFaEKJ0G0f0q'
       }, {
@@ -33,6 +35,8 @@ module.exports = {
         photo: 'http://www.fillmurray.com/300/300',
         admin: false,
         rankId: 3,
+        tel: '555-5555',
+        email: 'user@test.com',
         summary: 'this is my summary',
         password: '$2a$08$hf6MYh81bz9qoIOONHTkWu9308Lup.O..HXejK2Z9hFaEKJ0G0f0q'
       }, {
@@ -44,6 +48,8 @@ module.exports = {
         photo: 'http://www.fillmurray.com/300/300',
         admin: true,
         rankId: 4,
+        tel: '555-5555',
+        email: 'user@test.com',
         summary: 'this is sparta',
         password: '$2a$08$hf6MYh81bz9qoIOONHTkWu9308Lup.O..HXejK2Z9hFaEKJ0G0f0q'
       }, {
@@ -55,6 +61,8 @@ module.exports = {
         photo: 'http://www.fillmurray.com/300/300',
         admin: false,
         rankId: 2,
+        tel: '555-5555',
+        email: 'user@test.com',
         summary: 'a tornado full of sharks',
         password: '$2a$08$hf6MYh81bz9qoIOONHTkWu9308Lup.O..HXejK2Z9hFaEKJ0G0f0q'
       }])

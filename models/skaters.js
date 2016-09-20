@@ -27,7 +27,9 @@
           }
         },
         summary: DataTypes.TEXT,
-        password: DataTypes.STRING
+        password: DataTypes.STRING,
+        tel: DataTypes.STRING,
+        email: DataTypes.STRING
       }, {
         // paranoid: true,
         timestamps: true,
