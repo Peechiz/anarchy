@@ -23,3 +23,4 @@ I'm currently consulting with them to improve the site, currently hosted on Hero
 - Navigation bar will sometimes fail to highlite (nav controller refactor needed)
 - Gear display image sometimes cuts off the bottom `<hr>`
 - Teams view styling needs to be fully mocked up / improved
+- Angular not loading properly in Safari, possibly others (use Chrome for now)
