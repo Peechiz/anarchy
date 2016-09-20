@@ -1,5 +1,7 @@
 const Boom = require('boom');
 const bcrypt = require('bcrypt');
+const JWT = require('jsonwebtoken');
+
 
 var rand = () => {
   var num = Math.floor(Math.random() * 1000)
@@ -22,8 +24,18 @@ module.exports = [{
     // auth: 'admin',
     handler: (req,res) => {
       const m = req.server.app.models;
+      const token = req.headers.authorization.split(' ')[1]
+      var exclude = ['password', 'tel', 'email']
+      if (token){
+        const decoded = JWT.verify(token, process.env.JWTKEY);
+        // if request from Admin, include contact info
+        if (!decoded.isAdmin){
+          exclude = ['password'];
+        }
+      }
+
       m.Skaters.findAll({
-        attributes: { exclude: ['password'] },
+        attributes: { exclude: exclude },
         include: [{
           model: m.Ranks,
           attributes: ['name']
@@ -49,7 +61,9 @@ module.exports = [{
       m.Skaters.create({
         userName: req.payload.userName,
         derbyName: `maggot${rand()}`,
-        password: bcrypt.hashSync(req.payload.password, 8)
+        password: bcrypt.hashSync(req.payload.password, 8),
+        tel: req.payload.tel,
+        email: req.payload.email
       }).then(result => {
         res(result)
       })
