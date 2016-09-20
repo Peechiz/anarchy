@@ -29,11 +29,6 @@
         isCurrent: DataTypes.BOOLEAN
       }, {
         timestamps: true,
-        // getterMethods: {
-        //   current: function(){
-        //     return this.isCurrent
-        //   }
-        // }
       });
       return SkaterGears;
     };
