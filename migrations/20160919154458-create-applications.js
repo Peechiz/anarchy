@@ -12,7 +12,8 @@ module.exports = {
         references: {
           model: 'skaters',
           key: 'id'
-        }
+        },
+        onDelete: 'cascade'
       },
       xp: {
         type: Sequelize.TEXT
