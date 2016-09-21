@@ -40,7 +40,8 @@ function adminController($scope, api, isAdmin, ranks, teams, $window){
     ],
   };
   a.show = {
-    table: true
+    table: true,
+    apps: {}
   };
 
   a.select = function(key){
@@ -57,7 +58,7 @@ function adminController($scope, api, isAdmin, ranks, teams, $window){
   if (a.isAdmin){
     api.getSkaters().then(res=>{
       a.skaters = res.data;
-      // console.log(a.skaters);
+      console.log(a.skaters);
       a.skaters.forEach(skater => {
         a.data.skaters[skater.id] = {};
 
