@@ -39,7 +39,7 @@ console.log('creating relationships...');
   m.Reviews.belongsTo(m.Gears)
   m.Gears.hasMany(m.Reviews)
 
-  m.Skaters.hasOne(m.Applications)
+  m.Skaters.hasOne(m.Applications,{ onDelete: 'cascade' , hooks: true})
   m.Applications.belongsTo(m.Skaters)
 })(models);
 
