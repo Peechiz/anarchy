@@ -99,9 +99,8 @@
       <tr ng-if="skater.rankId == 1" ng-show="a.show.apps[skater.id]" ng-repeat-end>
         <td colspan="10">
           <p>{{skater.application.xp}}</p>
-          <p>Has Skates: {{skater.hasSkates ? 'true' : 'false'}}</p>
-          <p>Has Pads: {{skater.hasPads ? 'true' : 'false'}}</p>
-          <p></p>
+          <p>Has Skates: <span ng-if="skater.application.hasSkates">True</span><span ng-if="!skater.application.hasSkates">False</span></p>
+          <p>Has Pads: <span ng-if="skater.application.hasPads">True</span><span ng-if="!skater.application.hasPads">False</span></p>
         </td>
       </tr>
 
