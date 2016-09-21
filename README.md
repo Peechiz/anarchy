@@ -13,7 +13,7 @@ I'm currently consulting with them to improve the site, currently hosted on Hero
 - [x] **Skater Profiles**
 - [ ] Admin Panel
   - [x] **Full skaters CRUD**
-  - [x] View pending skater applications
+  - [x] **View pending skater applications**
   - [ ] Front Page editing
 - [x] New Skater Application
 - [ ] Calendar (supporting public/private events, Admin/Author permission editing)
