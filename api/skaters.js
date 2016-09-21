@@ -4,7 +4,7 @@ const JWT = require('jsonwebtoken');
 
 
 var rand = () => {
-  var num = Math.floor(Math.random() * 1000)
+  var num = Math.floor(Math.random() * 9999)
   num = num.toString();
   if (num.length < 4){
     var diff = 4 - num.length;
@@ -24,30 +24,48 @@ module.exports = [{
     // auth: 'admin',
     handler: (req,res) => {
       const m = req.server.app.models;
-      const token = req.headers.authorization.split(' ')[1]
-      var exclude = ['password', 'tel', 'email']
-      if (token){
-        const decoded = JWT.verify(token, process.env.JWTKEY);
-        // if request from Admin, include contact info
-        if (!decoded.isAdmin){
-          exclude = ['password'];
-        }
+      var token = req.headers.authorization
+      var exclude = ['password']
+      var include = [{
+        model: m.Ranks,
+        attributes: ['name']
+      },{
+        model: m.Teams,
+        attributes: ['teamName']
+      },{
+        model: m.Applications
+      }]
+
+      function safeResponse(){
+        console.log('NOT AN ADMIN');
+        exclude = ['password', 'tel', 'email'];
+        include.pop();
       }
+      if (token){
+        token = token.split(' ')[1];
+        const decoded = JWT.verify(token, process.env.JWTKEY);
+        console.log('TOKEN',decoded);
+        // if request from Admin, include contact info
+        if (!decoded.admin){
+          safeResponse();
+        } else {
+          console.log('IS ADMIN');
+        }
+      } else {
+        console.log('NO TOKEN');
+        safeResponse();
+      }
+      console.log(exclude);
 
       m.Skaters.findAll({
         attributes: { exclude: exclude },
-        include: [{
-          model: m.Ranks,
-          attributes: ['name']
-        },{
-          model: m.Teams,
-          attributes: ['teamName']
-        }]
+        include: include
       }).then((records) => {
         // console.log(records.toJSON());
         const data = records.map(record => {
           return record.dataValues
         })
+        console.log(data);
         res(data);
       })
     }
