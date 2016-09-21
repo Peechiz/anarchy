@@ -30,7 +30,8 @@
         <th>Photo</th>
         <th>User</th>
         <th>Derby Name</th>
-        <th>#</th>
+        <th>Tel</th>
+        <th>Email</th>
         <th>Team</th>
         <th>Rank</th>
         <th>Admin</th>
@@ -38,14 +39,18 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="skater in a.skaters | orderBy : a.sort : a.reverse | type : a.type"
+      <tr ng-repeat-start="skater in a.skaters | orderBy : a.sort : a.reverse | type : a.type"
       ng-class="{'stripe': $even}">
         <td ng-init="a.edit[skater.id]=true" ng-show="a.edit[skater.id]"><img ng-src={{skater.photo}} alt=""></td>
         <td ng-show="a.edit[skater.id]">{{skater.userName}}</td>
         <td ng-show="a.edit[skater.id]"><a href="/#/skaters/{{skater.id}}">{{skater.derbyName}}</a></td>
-        <td ng-show="a.edit[skater.id]">{{skater.number}}</td>
-        <td ng-show="a.edit[skater.id]">{{skater.team.teamName}}</td>
-        <td ng-show="a.edit[skater.id]">{{skater.rank.name}}</td>
+        <td ng-show="a.edit[skater.id]">{{skater.tel}}</td>
+        <td ng-show="a.edit[skater.id]"><a href="mailto:{{skater.email}}">{{skater.email}}</a></td>
+        <td ng-show="a.edit[skater.id]">{{skater.team.teamName || '-----'}}</td>
+        <td ng-show="a.edit[skater.id]" ng-init="a.show.apps[skater.id] = false">
+          <span ng-hide="skater.rankId == 1">{{skater.rank.name}}</span>
+          <span ng-show="skater.rankId == 1"><a href="" ng-click="a.show.apps[skater.id] = !a.show.apps[skater.id]">{{skater.rank.name}}</a></span>
+        </td>
         <td ng-show="a.edit[skater.id]">{{skater.admin}}</td>
         <td ng-show="a.edit[skater.id]"><a href="" ng-click="a.edit[skater.id]=false">edit</a></td>
         <td ng-show="a.edit[skater.id]"><a href="" ng-click="a.deletePrompt(skater)">delete</a></td>
@@ -61,7 +66,10 @@
             {{skater.derbyName}}"
           </td>
           <td ng-hide="a.edit[skater.id]">
-            {{skater.number}}
+            {{skater.tel}}
+          </td>
+          <td ng-hide="a.edit[skater.id]">
+            <a href="mailto:{{skater.email}}">{{skater.email}}</a>
           </td>
           <td ng-hide="a.edit[skater.id]">
             <select
@@ -87,9 +95,17 @@
             <a href="" ng-click="a.edit[skater.id] = true">cancel</a>
           </td>
         </form>
-
       </tr>
-    </tbody>
+      <tr ng-if="skater.rankId == 1" ng-show="a.show.apps[skater.id]" ng-repeat-end>
+        <td colspan="10">
+          <p>{{skater.application.xp}}</p>
+          <p>Has Skates: {{skater.hasSkates ? 'true' : 'false'}}</p>
+          <p>Has Pads: {{skater.hasPads ? 'true' : 'false'}}</p>
+          <p></p>
+        </td>
+      </tr>
+
+    </tbody ng-repeat-end>
   </table>
 
 <!-- ADD SKATER -->
