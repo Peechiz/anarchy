@@ -1,23 +1,16 @@
-<div class="path">
-  <h3><a ng-click="t.selected=null">Teams</a> > {{t.selected}}</h3>
-</div>
-
-<div ng-repeat="team in t.teams" class="teams">
-  <div ng-hide="t.selected">
-    <h1>{{team.teamName}}</h1>
-    <button ng-click="t.selected = team.teamName">skaters</button>
-  </div>
-
-  <div ng-show="t.selected === team.teamName">
-    <h1>{{team.teamName}}</h1>
-    <hr>
+<div class="teams" >
+  <h1 ng-repeat-start="team in t.teams"
+    ng-init="t.select[team.id] = false"
+    ng-click="t.select[team.id] = !t.select[team.id]">
+      <span ng-class="{'selected': t.select[team.id] == true}">{{team.teamName}}</span></h1>
+  <hr>
+  <div ng-if='t.select[team.id] == true' ng-repeat-end>
     <div class="skaters"
-          ng-repeat="skater in team.skaters"
-          ng-class="{'stripe': $odd}"
-          ng-click="t.view(skater.id)">
+    ng-repeat="skater in team.skaters"
+    ng-class="{'stripe': $odd}"
+    ng-click="t.view(skater.id)">
       <img ng-src={{skater.photo}} alt="">
       <p>#{{skater.number}} {{skater.derbyName}}</p>
     </div>
   </div>
-
 </div>

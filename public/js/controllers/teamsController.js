@@ -7,7 +7,7 @@ function teamsController($scope, $window, teams){
   const t = this;
 
   t.teams = teams.data;
-  t.selected;
+  t.select = {};
 
   t.view = function(id) {
     $window.location.href = `/#/skaters/${id}`;
