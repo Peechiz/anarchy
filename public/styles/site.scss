@@ -147,6 +147,11 @@ main {
   border-right: 7px solid transparent;
 }
 
+.passWarning {
+  color: $blood;
+  text-align: center;
+}
+
 .admin {
   display: flex;
   justify-content: center;
@@ -156,10 +161,6 @@ main {
   .newSkater {
     div {
       margin: 15px 0;
-    }
-    .passWarning {
-      color: $blood;
-      text-align: center;
     }
   }
   .sort {
@@ -214,6 +215,8 @@ main {
     width: 80%;
     img {
       height: 75px;
+      padding: 4px;
+      margin: 0;
     }
     thead > tr {
       margin-bottom: 10px;
@@ -229,8 +232,16 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  @include h1Tabs;
   h1, h3 {
     text-transform: uppercase;
+  }
+  hr {
+    // border-bottom: 1px solid #979797;
+    border: none;
+    height: 1px;
+    background-color: $greyed;
+    width: 50%;
   }
   .skaters {
     cursor: pointer;
@@ -250,6 +261,17 @@ main {
       font-size: 2em;
       margin: 4px 10px 4px 10px;
     }
+  }
+}
+
+.whoarewe {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  p {
+    font-size: 1.3em;
+    max-width: 50%;
   }
 }
 

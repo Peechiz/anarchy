@@ -80,6 +80,10 @@ main {
   background-color: #141414;
   padding: 10px 30px; }
 
+.passWarning {
+  color: #BA141A;
+  text-align: center; }
+
 .admin {
   display: flex;
   justify-content: center;
@@ -97,9 +101,6 @@ main {
       color: currentColor; }
   .admin .newSkater div {
     margin: 15px 0; }
-  .admin .newSkater .passWarning {
-    color: #BA141A;
-    text-align: center; }
   .admin .sort {
     position: relative;
     display: block; }
@@ -156,7 +157,9 @@ main {
       border-top: 1px solid #BA141A;
       border-bottom: 1px solid #BA141A; }
     .admin table img {
-      height: 75px; }
+      height: 75px;
+      padding: 4px;
+      margin: 0; }
     .admin table thead > tr {
       margin-bottom: 10px; }
     .admin table th {
@@ -167,8 +170,23 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center; }
+  .teams h1 span {
+    cursor: pointer;
+    color: #4A4A4A; }
+    .teams h1 span:hover {
+      color: #BA5C60; }
+  .teams h1 .selected {
+    color: white;
+    cursor: default; }
+    .teams h1 .selected:hover {
+      color: currentColor; }
   .teams h1, .teams h3 {
     text-transform: uppercase; }
+  .teams hr {
+    border: none;
+    height: 1px;
+    background-color: #4A4A4A;
+    width: 50%; }
   .teams .skaters {
     cursor: pointer;
     display: flex;
@@ -184,6 +202,15 @@ main {
       font-family: 'rockSalt';
       font-size: 2em;
       margin: 4px 10px 4px 10px; }
+
+.whoarewe {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center; }
+  .whoarewe p {
+    font-size: 1.3em;
+    max-width: 50%; }
 
 .join p {
   font-size: 1.3em;
