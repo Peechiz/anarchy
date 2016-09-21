@@ -1,3 +1,17 @@
+var rand = () => {
+  var num = Math.floor(Math.random() * 9999)
+  num = num.toString();
+  if (num.length < 4){
+    var diff = 4 - num.length;
+    num = num.split('')
+    for (var i = 0; i < diff; i++){
+      num.unshift('0')
+    }
+    return num.join('')
+  }
+  return num;
+}
+
 module.exports = [{
   method: 'POST',
   path: '/api/applications',
@@ -10,6 +24,9 @@ module.exports = [{
         return m.Skaters.create({
           userName: req.payload.userName,
           password: req.payload.password,
+          email: req.payload.email,
+          tel: req.payload.tel,
+          derbyName: `maggot${rand()}`,
         },{transaction: t}).then(skater => {
           return m.Applications.create({
             skaterId: skater.id,
