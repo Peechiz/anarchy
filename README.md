@@ -2,6 +2,8 @@
 
 A new webapp for the Austin Men's Flat Track Roller Derby Team
 
+![Splash Image](http://mrpeech.com/img/anarchy.png)
+
 ## Goals and Objectives
 
 ATX Anarchy's current website is a static wordpress with minimal functionality and a design that doesn't leverage the team's aesthetic.  With that in mind, it was my intention to create a more visually pleasing design that also provided functionality that might be usefull to the team.
