@@ -1,8 +1,17 @@
 # Austin Anarchy
 
-A new webapp for the Austin Men's Flat Track Roller Derby Team
+**This is an app to manage roller derby team members and share gear status/reviews. It was built in two weeks.**
 
 ![Splash Image](http://mrpeech.com/img/anarchy.png)
+
+**Technologies:**
+- Node.js
+- Hapi
+- PostgreSQL
+- Sequelize
+- Angular 1.4
+- Heroku (for deployment)
+---
 
 ## Goals and Objectives
 
