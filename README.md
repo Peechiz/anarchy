@@ -33,4 +33,4 @@ I'm currently consulting with them to improve the site, currently hosted on Hero
 ## Known Issues
 - Navigation bar will sometimes fail to highlite (nav controller refactor needed)
 - Gear display image sometimes cuts off the bottom `<hr>`
-- Angular not loading properly in Safari, possibly others (use Chrome for now)
+- Angular not loading properly in Safari
